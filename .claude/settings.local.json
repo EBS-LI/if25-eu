@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(python:*)",
+      "Bash(C:/CC/EU/html2pdf.bat:*)",
+      "Bash(winget install:*)",
+      "Bash(export:*)",
+      "Bash(\"/c/Users/alexa/AppData/Local/Pandoc/pandoc.exe\":*)",
+      "Bash(where pdflatex:*)",
+      "Bash(where xelatex:*)",
+      "Bash(where lualatex:*)",
+      "Bash(where:*)",
+      "Bash(mkdir:*)",
+      "Bash(tr >:*)"
+    ]
+  }
+}
