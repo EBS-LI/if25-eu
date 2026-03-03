@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Kooperationsanfrage an Reverion GmbH</title>
+<style>
+  /* ========== NAVIGATION ========== */
+  .site-nav {
+    background: #1a3a5c;
+    padding: 8px 15mm;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .site-nav a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 9.5pt;
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .site-nav a:hover { background: rgba(255,255,255,0.15); color: #fff; }
+  .site-nav a.nav-active { background: #2980b9; color: #fff; font-weight: 600; }
+  .site-nav .nav-brand {
+    font-weight: 700;
+    color: #fff;
+    font-size: 10pt;
+    margin-right: 10px;
+    padding-right: 15px;
+    border-right: 1px solid rgba(255,255,255,0.3);
+  }
+  @media print { .site-nav { display: none; } }
+</style>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --accent: #2980b9;
+    --text: #2c3e50;
+    --text-light: #5d6d7e;
+    --border: #dde1e5;
+    --light-bg: #f8f9fa;
+    --success: #27ae60;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: var(--text);
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 15mm 20mm;
+    background: #fff;
+  }
+
+  /* Briefkopf */
+  .letterhead {
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 5mm;
+    margin-bottom: 8mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .letterhead-sender {
+    font-size: 10pt;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+  .letterhead-sender strong {
+    font-size: 12pt;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 1mm;
+  }
+  .letterhead-date {
+    font-size: 10pt;
+    color: var(--text-light);
+    text-align: right;
+  }
+
+  /* Empfaenger */
+  .recipient {
+    margin-bottom: 8mm;
+    font-size: 10.5pt;
+    line-height: 1.6;
+  }
+
+  /* Betreff */
+  .subject {
+    font-size: 12pt;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 6mm;
+    padding-bottom: 2mm;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Textteil */
+  p { margin-bottom: 4mm; text-align: justify; hyphens: auto; }
+
+  h2 {
+    font-size: 11.5pt;
+    color: var(--primary);
+    margin-top: 7mm;
+    margin-bottom: 3mm;
+  }
+
+  ul, ol {
+    margin: 2mm 0 4mm 6mm;
+    padding-left: 4mm;
+  }
+  li { margin-bottom: 1.5mm; }
+
+  /* Highlight-Box */
+  .highlight {
+    background: #eaf2f8;
+    border-left: 4px solid var(--accent);
+    padding: 4mm 5mm;
+    margin: 5mm 0;
+    font-size: 10.5pt;
+  }
+  .highlight strong { color: var(--primary); }
+
+  /* Projekt-Steckbrief */
+  .fact-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 4mm 0 6mm 0;
+    font-size: 10.5pt;
+  }
+  .fact-table td {
+    padding: 2mm 3mm;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .fact-table td:first-child {
+    width: 40%;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  /* Anforderungsliste */
+  .request-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 4mm 0 6mm 0;
+    font-size: 10.5pt;
+  }
+  .request-table th {
+    background: var(--primary);
+    color: #fff;
+    padding: 2.5mm 3mm;
+    text-align: left;
+    font-weight: 600;
+    font-size: 10pt;
+  }
+  .request-table td {
+    padding: 2.5mm 3mm;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .request-table tr:nth-child(even) { background: var(--light-bg); }
+  .prio-tag {
+    display: inline-block;
+    font-size: 8pt;
+    font-weight: 700;
+    padding: 0.5mm 2mm;
+    border-radius: 2mm;
+    color: #fff;
+  }
+  .prio-hoch { background: #c0392b; }
+  .prio-mittel { background: #e67e22; }
+
+  /* Mehrwert-Box */
+  .benefit-box {
+    background: #e8f8f0;
+    border: 1px solid #a3d9b1;
+    border-radius: 3mm;
+    padding: 5mm;
+    margin: 5mm 0;
+  }
+  .benefit-box h3 {
+    color: var(--success);
+    font-size: 11pt;
+    margin-bottom: 2mm;
+  }
+  .benefit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3mm;
+    font-size: 10pt;
+  }
+  .benefit-item {
+    padding: 2mm;
+  }
+  .benefit-item strong { color: var(--primary); display: block; margin-bottom: 1mm; }
+
+  /* Unterschrift */
+  .signature {
+    margin-top: 12mm;
+    line-height: 1.5;
+  }
+  .signature-line {
+    margin-top: 15mm;
+    border-top: 1px solid var(--text);
+    width: 60mm;
+    padding-top: 1mm;
+    font-size: 10pt;
+    color: var(--text-light);
+  }
+
+  /* Anlagen */
+  .attachments {
+    margin-top: 8mm;
+    padding-top: 4mm;
+    border-top: 1px solid var(--border);
+    font-size: 10pt;
+    color: var(--text-light);
+  }
+  .attachments strong { color: var(--text); }
+
+  /* Vertraulichkeit */
+  .confidential {
+    margin-top: 6mm;
+    padding: 3mm 4mm;
+    background: var(--light-bg);
+    border: 1px solid var(--border);
+    font-size: 9pt;
+    color: var(--text-light);
+    font-style: italic;
+  }
+
+  /* Seitenumbruch */
+  .page-break { page-break-before: always; }
+
+  @media print {
+    body { padding: 12mm 18mm; }
+    .page-break { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+<script>
+  if (sessionStorage.getItem('if25auth') !== '572c59856823eb9418594e39bdeca72b8008c0490a4e26ce2f3689ccd603c7c5') {
+    window.location.href = 'index.html';
+  }
+</script>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">IF25 NZT</a>
+  <a href="strukturplan.html">Strukturplan &amp; To-Do</a>
+  <a href="phasenplan.html">Phasenplan</a>
+  <a href="reverion.html" class="nav-active">Reverion</a>
+</nav>
+
+<!-- ==================== BRIEFKOPF ==================== -->
+<div class="letterhead">
+  <div class="letterhead-sender">
+    <strong>Energieberatung Schwaigkofler GmbH</strong>
+    Poststrasse 2<br>
+    FL-9491 Ruggell<br>
+    Tel.: +49 821 567 316 77<br>
+    Mobil: +49 160 79 68 932<br>
+    E-Mail: info@schwaigkofler.org<br>
+    Web: schwaigkofler.org
+  </div>
+  <div class="letterhead-date">
+    [Ort], den [Datum]
+  </div>
+</div>
+
+<!-- ==================== EMPFAENGER ==================== -->
+<div class="recipient">
+  Reverion GmbH<br>
+  z.&thinsp;Hd. Herrn Fabian Gohlke<br>
+  Am Mittelfeld 11<br>
+  86922 Eresing
+</div>
+
+<!-- ==================== BETREFF ==================== -->
+<div class="subject">
+  Kooperationsanfrage &mdash; Einsatz der Reverion rSOC-Technologie in einem
+  Biomethan-Konsortium in Bayern im Rahmen des EU Innovation Fund IF25 NZT
+  (8&nbsp;Biogasanlagen, ~15&nbsp;Mio.&nbsp;EUR Investitionsvolumen)
+</div>
+
+<!-- ==================== ANREDE ==================== -->
+<p>Sehr geehrter Herr Gohlke,</p>
+
+<p>
+  ich wende mich als Energieberater im Auftrag eines Zusammenschlusses von acht
+  Biogasanlagenbetreibern aus Bayern an Sie. Wir bereiten derzeit einen Antrag beim
+  <strong>EU Innovation Fund (IF25 &mdash; Net-Zero Technologies, Small-Scale)</strong>
+  vor und sehen in der Reverion rSOC-Technologie einen zentralen Baustein unseres Vorhabens.
+</p>
+
+<p>
+  Ich m&ouml;chte Ihnen das Projekt kurz vorstellen und anschlie&szlig;end darlegen,
+  warum eine Kooperation f&uuml;r beide Seiten au&szlig;ergew&ouml;hnlich attraktiv sein k&ouml;nnte.
+</p>
+
+<!-- ==================== PROJEKTSTECKBRIEF ==================== -->
+<h2>1 &ensp; Das Projekt im &Uuml;berblick</h2>
+
+<table class="fact-table">
+  <tr><td>Projekttitel (Arbeitstitel)</td><td>Biomethan-Konsortium Bayern &mdash; Integrierte Biogasaufbereitung mit innovativer CO2-Abscheidung</td></tr>
+  <tr><td>Konsortium</td><td>8 Biogasanlagenbetreiber, die eine gemeinsame <strong>Projektgesellschaft</strong> gr&uuml;nden</td></tr>
+  <tr><td>Standorte</td><td>8 Biogasanlagen (Rohbiogas-Erzeugung) + <strong>1&nbsp;zentraler Aufbereitungsstandort</strong> (Membrananlage + 1&nbsp;Reverion rSOC-Einheit)</td></tr>
+  <tr><td>Technologie-Konzept</td><td>Membran-Upgrading (Biogas &rarr; Biomethan) + <strong>1&nbsp;Reverion rSOC-Anlage</strong> zur CO2-Abscheidung in Lebensmittelqualit&auml;t am zentralen Standort</td></tr>
+  <tr><td>Infrastruktur</td><td>~20&nbsp;km Rohbiogas-Sammelleitung von den 8&nbsp;Anlagen zum zentralen Standort + Erdgasnetz-Einspeisung + LKW-Vertrieb CO2 an Brauereien</td></tr>
+  <tr><td>Investitionsvolumen</td><td>~15&nbsp;Mio.&nbsp;EUR (CAPEX)</td></tr>
+  <tr><td>F&ouml;rderprogramm</td><td>EU Innovation Fund IF25 NZT (Small-Scale, 2,5&ndash;20&nbsp;Mio.&nbsp;EUR)</td></tr>
+  <tr><td>F&ouml;rderquote</td><td>Bis zu <strong>60&nbsp;%</strong> der relevanten Kosten</td></tr>
+  <tr><td>Antragsfrist</td><td><strong>23.&nbsp;April&nbsp;2026</strong></td></tr>
+</table>
+
+<h2>2 &ensp; Die Rolle der Reverion-Technologie</h2>
+
+<p>
+  Das Kernkonzept des Projekts basiert auf der <strong>Kombination von Membranaufbereitung
+  und Reverion rSOC-Technologie</strong>. W&auml;hrend die Membrantechnik das Biogas zu
+  einspeisereifem Biomethan aufbereitet, &uuml;bernimmt die Reverion-Anlage die Aufgabe,
+  das anfallende CO2 <strong>in Lebensmittelqualit&auml;t</strong> (Food-Grade) abzuscheiden
+  &mdash; anstatt es, wie bisher &uuml;blich, &uuml;ber eine konventionelle RTO thermisch
+  zu oxidieren und ungenutzt in die Atmosph&auml;re abzugeben.
+</p>
+
+<p>
+  Diese integrierte L&ouml;sung ist aus unserer Sicht <strong>hochinnovativ und einzigartig</strong>:
+</p>
+
+<ul>
+  <li>Reverion rSOC statt konventioneller RTO &mdash; das ist keine inkrementelle, sondern eine
+    <strong>disruptive Verbesserung</strong> (Breakthrough-Innovation im Sinne des Innovation Fund)</li>
+  <li>Gleichzeitige Erzeugung eines marktf&auml;higen Produkts (Food-Grade CO2) statt reiner Abfallbehandlung</li>
+  <li>Beitrag zur regionalen <strong>CO2-Kreislaufwirtschaft</strong> (Abnehmer: Brauereien, Getr&auml;nkeindustrie)</li>
+  <li>Zentraler Aufbereitungsstandort f&uuml;r 8&nbsp;Biogasanlagen als <strong>Blaupause</strong> f&uuml;r &uuml;ber 9.000 Biogasanlagen in Deutschland</li>
+</ul>
+
+<div class="highlight">
+  <strong>Bewertungskriterium &bdquo;Degree of Innovation&ldquo;:</strong> Dieses Kriterium ist ein
+  Pass/Fail-Gate im Innovation Fund. Der Einsatz der Reverion-Technologie ist der entscheidende
+  Differenzierungsfaktor gegen&uuml;ber konventionellen Biogasaufbereitungsprojekten und macht
+  den Antrag &uuml;berhaupt erst f&ouml;rderf&auml;hig.
+</div>
+
+<!-- ==================== SEITENUMBRUCH ==================== -->
+<div class="page-break"></div>
+
+<h2>3 &ensp; Warum diese Kooperation f&uuml;r Reverion interessant ist</h2>
+
+<div class="benefit-box">
+  <h3>Gegenseitiger Mehrwert</h3>
+  <div class="benefit-grid">
+    <div class="benefit-item">
+      <strong>Leuchtturmprojekt &amp; EU-Sichtbarkeit</strong>
+      Ein erfolgreich gef&ouml;rdertes Innovation-Fund-Projekt positioniert die Reverion-Technologie
+      auf h&ouml;chster europ&auml;ischer Ebene. Von CINEA verwaltete Innovation-Fund-Projekte
+      haben hohe mediale Strahlkraft.
+    </div>
+    <div class="benefit-item">
+      <strong>Gebündelte Gasmengen von 8&nbsp;Anlagen</strong>
+      Die Zusammenf&uuml;hrung des Rohbiogases von 8&nbsp;Betreibern an einem zentralen Standort
+      erm&ouml;glicht eine Anlagengr&ouml;&szlig;e mit hohem Durchsatz &mdash; ideale Bedingungen
+      f&uuml;r eine aussagekr&auml;ftige Demonstration Ihrer Technologie.
+    </div>
+    <div class="benefit-item">
+      <strong>Referenzprojekt f&uuml;r Food-Grade CO2</strong>
+      Der Nachweis, dass Reverion-Systeme CO2 in Lebensmittelqualit&auml;t aus Biogas erzeugen k&ouml;nnen,
+      &ouml;ffnet einen v&ouml;llig neuen Markt (Brauereien, Getr&auml;nke, Trockeneis).
+    </div>
+    <div class="benefit-item">
+      <strong>TRL-Progression &amp; Felddaten</strong>
+      Ein Dauerbetrieb unter realen Bedingungen mit dem gebündelten Gasvolumen von 8&nbsp;Anlagen
+      liefert eine belastbare Datenbasis f&uuml;r die Weiterentwicklung und zuk&uuml;nftige Zertifizierung.
+    </div>
+  </div>
+</div>
+
+<p>
+  Dar&uuml;ber hinaus bietet das Projekt einen <strong>echten Markt f&uuml;r das erzeugte CO2</strong>:
+  Die bayerische Brauereilandschaft hat einen erheblichen Bedarf an lebensmitteltauglichem CO2,
+  der derzeit &uuml;berwiegend aus fossilen Quellen gedeckt wird. Erste Gespr&auml;che mit potenziellen
+  Abnehmern laufen bereits.
+</p>
+
+<!-- ==================== ANFRAGE ==================== -->
+<h2>4 &ensp; Unsere konkrete Anfrage an Reverion</h2>
+
+<p>
+  F&uuml;r die Erstellung des Innovation-Fund-Antrags ben&ouml;tigen wir von Ihnen folgende Unterlagen
+  und Informationen. Ich habe die Punkte nach Dringlichkeit sortiert:
+</p>
+
+<table class="request-table">
+  <thead>
+    <tr><th style="width:5%;">Nr.</th><th style="width:40%;">Was wir ben&ouml;tigen</th><th style="width:35%;">Wof&uuml;r</th><th style="width:10%;">Priorit&auml;t</th><th style="width:10%;">Bis wann</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><strong>Technische Spezifikationen</strong> der rSOC-Anlage
+        (Kapazit&auml;t, CO2-Reinheit, Energieeffizienz, Ein-/Ausgangsstr&ouml;me)</td>
+      <td>Machbarkeitsstudie, Part&nbsp;B (Technische Beschreibung)</td>
+      <td><span class="prio-tag prio-hoch">HOCH</span></td>
+      <td>14.&nbsp;M&auml;rz</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><strong>TRL-Nachweis</strong> (aktueller Technologiereifegrad mit Belegen:
+        Testergebnisse, Pilotberichte, Ver&ouml;ffentlichungen)</td>
+      <td>Part&nbsp;B, Abschnitt &bdquo;Degree of Innovation&ldquo; (Pass/Fail!)</td>
+      <td><span class="prio-tag prio-hoch">HOCH</span></td>
+      <td>14.&nbsp;M&auml;rz</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><strong>Referenzanlagen / Pilotprojekte</strong>
+        (Standorte, Laufzeiten, gemessene Performance)</td>
+      <td>Part&nbsp;B, Machbarkeitsstudie</td>
+      <td><span class="prio-tag prio-hoch">HOCH</span></td>
+      <td>14.&nbsp;M&auml;rz</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><strong>Indikatives Angebot / Kostenvoranschlag</strong>
+        f&uuml;r die geplante Konfiguration (1&nbsp;zentraler Standort, Gasvolumen von 8&nbsp;Biogasanlagen)</td>
+      <td>Financial Information File (FIF), CAPEX-Kalkulation</td>
+      <td><span class="prio-tag prio-hoch">HOCH</span></td>
+      <td>20.&nbsp;M&auml;rz</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><strong>Letter of Support</strong> (Unters&uuml;tzungsschreiben)
+        &mdash; Vorlage liegt bei</td>
+      <td>Pflichtanlage zum Innovation-Fund-Antrag</td>
+      <td><span class="prio-tag prio-hoch">HOCH</span></td>
+      <td>20.&nbsp;M&auml;rz</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><strong>CO2-Qualit&auml;tszertifizierung</strong>
+        (ISBT/EIGA-Konformit&auml;t oder Labornachweise zur CO2-Reinheit)</td>
+      <td>Business Plan, Marktargument Food-Grade CO2</td>
+      <td><span class="prio-tag prio-mittel">MITTEL</span></td>
+      <td>27.&nbsp;M&auml;rz</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><strong>Installations- und Wartungskonzept</strong>
+        (typischer Zeitplan, Personalaufwand, Service-Modell)</td>
+      <td>Part&nbsp;B (Arbeitsplan), OPEX-Kalkulation</td>
+      <td><span class="prio-tag prio-mittel">MITTEL</span></td>
+      <td>27.&nbsp;M&auml;rz</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>5 &ensp; Vorlage Unters&uuml;tzungsschreiben (Letter of Support)</h2>
+
+<p>
+  Als Anlage zu diesem Schreiben finden Sie eine <strong>Vorlage f&uuml;r das
+  Unters&uuml;tzungsschreiben</strong>, das wir als Pflichtdokument dem Innovation-Fund-Antrag beilegen m&uuml;ssen.
+  Das Schreiben ist bewusst unverbindlich formuliert und stellt keine vertragliche Verpflichtung dar.
+</p>
+<p>
+  Wir bitten Sie, die Vorlage zu pr&uuml;fen, ggf. an Ihre internen Vorgaben anzupassen und
+  auf <strong>Reverion-Briefpapier</strong> unterschrieben an uns zur&uuml;ckzusenden.
+  Die Platzhalter (TRL-Level, Referenzanlagen etc.) bitten wir mit den aktuellen Daten zu bef&uuml;llen.
+</p>
+
+<!-- ==================== ZEITRAHMEN ==================== -->
+<h2>6 &ensp; Zeitrahmen</h2>
+
+<p>
+  Die <strong>Einreichungsfrist</strong> f&uuml;r den EU Innovation Fund ist der
+  <strong>23.&nbsp;April&nbsp;2026</strong>. Unser interner Zeitplan sieht vor:
+</p>
+
+<ul>
+  <li><strong>Bis 14.&nbsp;M&auml;rz:</strong> Technische Spezifikationen und TRL-Nachweis vorliegen</li>
+  <li><strong>Bis 20.&nbsp;M&auml;rz:</strong> Kostenvoranschlag und Letter of Support vorliegen</li>
+  <li><strong>Bis 27.&nbsp;M&auml;rz:</strong> Erg&auml;nzende Unterlagen (CO2-Qualit&auml;t, Wartungskonzept)</li>
+  <li><strong>Bis 10.&nbsp;April:</strong> Fachliche Pr&uuml;fung der Reverion-Abschnitte im Antrag durch Sie</li>
+</ul>
+
+<p>
+  Ich bin mir bewusst, dass die Zeitschiene ambitioniert ist. Gerne bin ich bereit,
+  die Abstimmung so effizient wie m&ouml;glich zu gestalten &mdash; telefonisch, per
+  Videokonferenz oder pers&ouml;nlich bei Ihnen in Eresing.
+</p>
+
+<!-- ==================== NAECHSTE SCHRITTE ==================== -->
+<h2>7 &ensp; Vorgeschlagene n&auml;chste Schritte</h2>
+
+<ol>
+  <li><strong>Kurzes Telefonat / Videokonferenz</strong> in der kommenden Woche, um das Projekt
+    vorzustellen und offene Fragen zu kl&auml;ren</li>
+  <li><strong>&Uuml;bermittlung der technischen Unterlagen</strong> gem&auml;&szlig; obiger Tabelle</li>
+  <li><strong>R&uuml;cksendung des Letter of Support</strong> auf Reverion-Briefpapier</li>
+  <li>Optional: <strong>Besichtigung</strong> einer der 8 Biogasanlagen, falls gew&uuml;nscht</li>
+</ol>
+
+<p>
+  Ich w&uuml;rde mich sehr freuen, wenn Reverion Teil dieses Vorhabens wird. Das Projekt bietet
+  Ihnen die Gelegenheit, Ihre Technologie unter realen Bedingungen mit dem geb&uuml;ndelten
+  Gasvolumen von acht Biogasanlagen zu demonstrieren und sich als f&uuml;hrende L&ouml;sung
+  f&uuml;r die CO2-Wertsch&ouml;pfung im Biogassektor zu positionieren.
+</p>
+
+<p>
+  F&uuml;r R&uuml;ckfragen stehe ich Ihnen jederzeit zur Verf&uuml;gung.
+</p>
+
+<!-- ==================== GRUSS ==================== -->
+<div class="signature">
+  <p>Mit freundlichen Gr&uuml;&szlig;en</p>
+  <div class="signature-line">
+    Alexander Schwaigkofler<br>
+    Energieberatung Schwaigkofler GmbH
+  </div>
+</div>
+
+<!-- ==================== ANLAGEN ==================== -->
+<div class="attachments">
+  <strong>Anlagen:</strong>
+  <ol>
+    <li>Vorlage Unters&uuml;tzungsschreiben (Letter of Support) &mdash; 2&nbsp;Seiten</li>
+    <li>Kurzbeschreibung des Projekts (optional, je nach Bedarf separat)</li>
+  </ol>
+</div>
+
+<!-- ==================== VERTRAULICHKEIT ==================== -->
+<div class="confidential">
+  Dieses Schreiben und die beigef&uuml;gten Unterlagen sind vertraulich und ausschlie&szlig;lich
+  f&uuml;r den genannten Empf&auml;nger bestimmt. Eine Weitergabe an Dritte bedarf der
+  vorherigen schriftlichen Zustimmung des Absenders.
+</div>
+
+</body>
+</html>

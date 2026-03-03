@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Projekt-Portal — EU Innovation Fund IF25 NZT</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --accent: #2980b9;
+    --success: #27ae60;
+    --warning: #e67e22;
+    --danger: #c0392b;
+    --light-bg: #f8f9fa;
+    --border: #dde1e5;
+    --text: #2c3e50;
+    --text-light: #5d6d7e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--light-bg);
+    min-height: 100vh;
+  }
+
+  /* ========== LOGIN OVERLAY ========== */
+  .login-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  .login-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 40px;
+    width: 380px;
+    max-width: 90vw;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    text-align: center;
+  }
+  .login-box h1 {
+    font-size: 16pt;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+  .login-box p {
+    font-size: 9.5pt;
+    color: var(--text-light);
+    margin-bottom: 25px;
+  }
+  .login-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    font-size: 11pt;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .login-input:focus { border-color: var(--accent); }
+  .login-input.error { border-color: var(--danger); animation: shake 0.4s; }
+  .login-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 11pt;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background 0.2s;
+  }
+  .login-btn:hover { background: #2471a3; }
+  .login-error {
+    color: var(--danger);
+    font-size: 9pt;
+    margin-top: 10px;
+    min-height: 1.2em;
+  }
+  .login-footer {
+    margin-top: 20px;
+    font-size: 8pt;
+    color: var(--text-light);
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+
+  /* ========== PORTAL (hidden until login) ========== */
+  .portal { display: none; }
+  .portal.visible { display: block; }
+
+  /* Header */
+  .site-header {
+    background: var(--primary);
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+  }
+  .site-header h1 {
+    font-size: 22pt;
+    margin-bottom: 4px;
+  }
+  .site-header p {
+    font-size: 11pt;
+    opacity: 0.8;
+  }
+
+  /* Container */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+
+  /* Projekt-Info */
+  .project-info {
+    background: #fff;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .project-info h2 {
+    color: var(--primary);
+    font-size: 14pt;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 20px;
+    font-size: 10pt;
+  }
+  .info-grid dt { font-weight: 600; color: var(--primary); }
+  .info-grid dd { color: var(--text); }
+
+  /* Countdown */
+  .countdown {
+    background: linear-gradient(135deg, var(--danger), #e74c3c);
+    color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(192,57,43,0.3);
+  }
+  .countdown-label { font-size: 10pt; text-transform: uppercase; letter-spacing: 2px; opacity: 0.9; }
+  .countdown-date { font-size: 22pt; font-weight: 700; margin: 6px 0; }
+  .countdown-days { font-size: 12pt; opacity: 0.9; }
+  #days-remaining { font-weight: 700; font-size: 16pt; }
+
+  /* Dokumenten-Karten */
+  .section-title {
+    font-size: 13pt;
+    color: var(--primary);
+    margin-bottom: 15px;
+    padding-left: 5px;
+  }
+
+  .doc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .doc-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.15s, box-shadow 0.15s;
+    text-decoration: none;
+    color: var(--text);
+    display: block;
+    border-left: 4px solid var(--accent);
+  }
+  .doc-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+  .doc-card-number {
+    font-size: 9pt;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .doc-card h3 {
+    color: var(--primary);
+    font-size: 11.5pt;
+    margin-bottom: 6px;
+  }
+  .doc-card p {
+    font-size: 9pt;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+  .doc-card-tag {
+    display: inline-block;
+    font-size: 7.5pt;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-top: 8px;
+    color: #fff;
+  }
+  .tag-alle { background: var(--primary); }
+  .tag-pg { background: #8e44ad; }
+  .tag-berater { background: var(--accent); }
+  .tag-extern { background: var(--warning); }
+
+  /* Phasen-Fortschritt */
+  .phase-bar {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .phase-bar h2 {
+    color: var(--primary);
+    font-size: 12pt;
+    margin-bottom: 15px;
+  }
+  .phases {
+    display: flex;
+    gap: 4px;
+  }
+  .phase-step {
+    flex: 1;
+    text-align: center;
+    padding: 10px 5px;
+    border-radius: 5px;
+    font-size: 8pt;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .phase-active {
+    background: var(--accent);
+    color: #fff;
+  }
+  .phase-future {
+    background: #e8e8e8;
+    color: var(--text-light);
+  }
+  .phase-step .phase-kw { font-size: 7pt; font-weight: 400; margin-top: 3px; display: block; }
+
+  /* Footer */
+  .site-footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-light);
+    font-size: 9pt;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+  .site-footer a { color: var(--accent); text-decoration: none; }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .doc-grid { grid-template-columns: 1fr; }
+    .info-grid { grid-template-columns: 1fr; }
+    .phases { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== LOGIN OVERLAY ==================== -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <h1>Biomethan-Konsortium Bayern</h1>
+    <p>EU Innovation Fund IF25 NZT &mdash; Projekt-Portal</p>
+    <form id="loginForm" onsubmit="return handleLogin(event)">
+      <input type="password" class="login-input" id="pwInput" placeholder="Passwort eingeben" autocomplete="off" autofocus>
+      <button type="submit" class="login-btn">Anmelden</button>
+      <div class="login-error" id="loginError"></div>
+    </form>
+    <div class="login-footer">
+      Zugang nur f&uuml;r Projektbeteiligte.<br>
+      Bei Fragen: info@schwaigkofler.org
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PORTAL ==================== -->
+<div class="portal" id="portal">
+
+<div class="site-header">
+  <h1>Biomethan-Konsortium Bayern</h1>
+  <p>EU Innovation Fund IF25 NZT &mdash; Projekt-Portal</p>
+</div>
+
+<div class="container">
+
+  <!-- Countdown -->
+  <div class="countdown">
+    <div class="countdown-label">Antragsfrist EU Innovation Fund</div>
+    <div class="countdown-date">23. April 2026</div>
+    <div class="countdown-days">Noch <span id="days-remaining">&hellip;</span> Tage</div>
+  </div>
+
+  <!-- Projekt-Info -->
+  <div class="project-info">
+    <h2>Projekt&uuml;bersicht</h2>
+    <dl class="info-grid">
+      <dt>Konsortium</dt>
+      <dd>8 Biogasanlagenbetreiber (Bayern)</dd>
+      <dt>Projektgesellschaft</dt>
+      <dd>Neugr&uuml;ndung (GmbH &amp; Co. KG empfohlen)</dd>
+      <dt>Technologie</dt>
+      <dd>Membran-Upgrading + 1 Reverion rSOC (Food-Grade CO2)</dd>
+      <dt>Standort</dt>
+      <dd>1 zentraler Aufbereitungsstandort + 20 km Sammelleitung</dd>
+      <dt>Investitionsvolumen</dt>
+      <dd>~15 Mio. EUR (CAPEX)</dd>
+      <dt>F&ouml;rderquote</dt>
+      <dd>Bis zu 60% der relevanten Kosten</dd>
+      <dt>F&ouml;rderprogramm</dt>
+      <dd>EU Innovation Fund IF25 &mdash; Net-Zero Technologies (Small-Scale)</dd>
+      <dt>Beratung</dt>
+      <dd>Energieberatung Schwaigkofler GmbH</dd>
+    </dl>
+  </div>
+
+  <!-- Phasen-Fortschritt -->
+  <div class="phase-bar">
+    <h2>Projektphasen</h2>
+    <div class="phases">
+      <div class="phase-step phase-active">
+        Phase 1<br>Gr&uuml;ndung<span class="phase-kw">KW 9&ndash;10</span>
+      </div>
+      <div class="phase-step phase-future">
+        Phase 2<br>Finanzen<span class="phase-kw">KW 11&ndash;12</span>
+      </div>
+      <div class="phase-step phase-future">
+        Phase 3<br>Antrag<span class="phase-kw">KW 13&ndash;14</span>
+      </div>
+      <div class="phase-step phase-future">
+        Phase 4<br>Review<span class="phase-kw">KW 15&ndash;16</span>
+      </div>
+      <div class="phase-step phase-future">
+        Phase 5<br>Einreichung<span class="phase-kw">KW 17</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dokumente -->
+  <h2 class="section-title">Projektdokumente</h2>
+
+  <div class="doc-grid">
+    <a href="strukturplan.html" class="doc-card">
+      <div class="doc-card-number">Dokument 01</div>
+      <h3>Projekt-Strukturplan &amp; To-Do-Listen</h3>
+      <p>6 Arbeitspakete, Zeitstrahl KW 9&ndash;17, separate To-Do-Listen f&uuml;r Berater, PG und Betreiber, Vollst&auml;ndigkeits-Checkliste.</p>
+      <span class="doc-card-tag tag-alle">Alle Beteiligten</span>
+    </a>
+
+    <a href="phasenplan.html" class="doc-card">
+      <div class="doc-card-number">Dokument 02</div>
+      <h3>Datenanforderungen &amp; Phasenplan</h3>
+      <p>Detaillierter Zulieferplan: Welche Daten werden wann von wem ben&ouml;tigt? 5 Phasen, alle Deadlines, Zusammenfassung nach Ziel-Dokument.</p>
+      <span class="doc-card-tag tag-alle">Alle Beteiligten</span>
+    </a>
+
+    <a href="reverion.html" class="doc-card">
+      <div class="doc-card-number">Dokument 03</div>
+      <h3>Kooperationsanfrage Reverion</h3>
+      <p>Strategische Kooperationsanfrage an Reverion GmbH (z.Hd. Fabian Gohlke): Projektsteckbrief, Mehrwert-Argumentation, konkrete Anforderungsliste.</p>
+      <span class="doc-card-tag tag-extern">Reverion GmbH</span>
+    </a>
+
+    <a href="vorauslegung.html" class="doc-card">
+      <div class="doc-card-number">Dokument 04</div>
+      <h3>Technische Vorauslegung</h3>
+      <p>Dimensionierung aller Komponenten: Membrananlage, Reverion rSOC, Pipeline (20 km), CO2-Logistik, Energiebilanz. Berechnungsformeln mit Platzhaltern.</p>
+      <span class="doc-card-tag tag-alle">Berater / PG</span>
+    </a>
+
+    <a href="#" class="doc-card" style="border-left-color: #ccc; opacity: 0.5; pointer-events: none;">
+      <div class="doc-card-number">Weitere Dokumente</div>
+      <h3>In Vorbereitung&hellip;</h3>
+      <p>Part B, Machbarkeitsstudie, Business Plan, Knowledge Sharing Plan, DNSH-Bewertung, FIF-Ausfuellhilfe &mdash; werden laufend erg&auml;nzt.</p>
+      <span class="doc-card-tag" style="background:#ccc;">Folgt</span>
+    </a>
+  </div>
+
+  <!-- Kontakt -->
+  <div class="project-info" style="margin-top: 10px;">
+    <h2>Kontakt</h2>
+    <dl class="info-grid">
+      <dt>Berater</dt>
+      <dd>Alexander Schwaigkofler</dd>
+      <dt>Unternehmen</dt>
+      <dd>Energieberatung Schwaigkofler GmbH</dd>
+      <dt>Adresse</dt>
+      <dd>Poststrasse 2, FL-9491 Ruggell</dd>
+      <dt>Telefon</dt>
+      <dd>+49 821 567 316 77</dd>
+      <dt>Mobil</dt>
+      <dd>+49 160 79 68 932</dd>
+      <dt>E-Mail</dt>
+      <dd>info@schwaigkofler.org</dd>
+    </dl>
+  </div>
+
+</div>
+
+<div class="site-footer">
+  &copy; 2026 Energieberatung Schwaigkofler GmbH &bull;
+  <a href="https://schwaigkofler.org">schwaigkofler.org</a><br>
+  Dieses Portal ist nicht &ouml;ffentlich. Bitte geben Sie den Link nicht an Dritte weiter.
+</div>
+
+</div><!-- /portal -->
+
+<script>
+  // SHA-256 hash
+  async function sha256(str) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  const HASH = '572c59856823eb9418594e39bdeca72b8008c0490a4e26ce2f3689ccd603c7c5';
+
+  // Check existing session
+  if (sessionStorage.getItem('if25auth') === HASH) {
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('portal').classList.add('visible');
+  }
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    const pw = document.getElementById('pwInput').value;
+    const hash = await sha256(pw);
+    if (hash === HASH) {
+      sessionStorage.setItem('if25auth', HASH);
+      document.getElementById('loginOverlay').style.display = 'none';
+      document.getElementById('portal').classList.add('visible');
+    } else {
+      document.getElementById('pwInput').classList.add('error');
+      document.getElementById('loginError').textContent = 'Falsches Passwort. Bitte erneut versuchen.';
+      setTimeout(() => document.getElementById('pwInput').classList.remove('error'), 400);
+    }
+    return false;
+  }
+
+  // Countdown
+  const deadline = new Date('2026-04-23T23:59:59');
+  function updateCountdown() {
+    const now = new Date();
+    const diff = deadline - now;
+    const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    const el = document.getElementById('days-remaining');
+    if (el) el.textContent = days > 0 ? days : '0';
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+
+  // Phase-Highlight
+  (function() {
+    const now = new Date();
+    const phases = document.querySelectorAll('.phase-step');
+    const starts = [
+      new Date('2026-02-23'),
+      new Date('2026-03-09'),
+      new Date('2026-03-23'),
+      new Date('2026-04-06'),
+      new Date('2026-04-14'),
+      new Date('2026-04-24'),
+    ];
+    phases.forEach((p, i) => {
+      p.classList.remove('phase-active', 'phase-future');
+      if (now >= starts[i] && now < starts[i+1]) {
+        p.classList.add('phase-active');
+      } else if (now < starts[i]) {
+        p.classList.add('phase-future');
+      } else {
+        p.style.background = '#a3d9b1';
+        p.style.color = '#fff';
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>

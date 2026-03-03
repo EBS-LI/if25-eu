@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Projekt-Strukturplan und To-Do-Listen — EU Innovation Fund IF25 NZT</title>
+<style>
+  /* ========== NAVIGATION ========== */
+  .site-nav {
+    background: #1a3a5c;
+    padding: 8px 15mm;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .site-nav a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 9.5pt;
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .site-nav a:hover { background: rgba(255,255,255,0.15); color: #fff; }
+  .site-nav a.nav-active { background: #2980b9; color: #fff; font-weight: 600; }
+  .site-nav .nav-brand {
+    font-weight: 700;
+    color: #fff;
+    font-size: 10pt;
+    margin-right: 10px;
+    padding-right: 15px;
+    border-right: 1px solid rgba(255,255,255,0.3);
+  }
+  @media print { .site-nav { display: none; } }
+</style>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --accent: #2980b9;
+    --success: #27ae60;
+    --warning: #e67e22;
+    --danger: #c0392b;
+    --light-bg: #f8f9fa;
+    --border: #dde1e5;
+    --text: #2c3e50;
+    --text-light: #5d6d7e;
+    --berater: #2980b9;
+    --pg: #8e44ad;
+    --betreiber: #27ae60;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: var(--text);
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 12mm 15mm;
+    background: #fff;
+  }
+
+  /* Deckblatt */
+  .cover {
+    text-align: center;
+    padding: 35mm 0 25mm 0;
+    border-bottom: 3px solid var(--primary);
+    margin-bottom: 8mm;
+  }
+  .cover-label {
+    font-size: 10pt;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 6mm;
+  }
+  .cover h1 {
+    font-size: 20pt;
+    color: var(--primary);
+    margin-bottom: 4mm;
+    line-height: 1.25;
+  }
+  .cover h2 {
+    font-size: 12pt;
+    color: var(--text-light);
+    font-weight: 400;
+    margin-bottom: 12mm;
+  }
+  .cover-meta {
+    font-size: 9.5pt;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+  .cover-meta strong { color: var(--text); }
+
+  /* Abschnitts-Banner */
+  .section-banner {
+    background: var(--primary);
+    color: #fff;
+    padding: 4mm 5mm;
+    margin: 8mm 0 5mm 0;
+    font-size: 14pt;
+    font-weight: 700;
+    page-break-before: always;
+  }
+  .section-banner:first-of-type { page-break-before: avoid; }
+  .section-banner-sub {
+    background: var(--accent);
+    color: #fff;
+    padding: 3mm 5mm;
+    margin: 6mm 0 4mm 0;
+    font-size: 11pt;
+    font-weight: 600;
+  }
+
+  /* PSP-Baum */
+  .psp-root {
+    background: var(--primary);
+    color: #fff;
+    text-align: center;
+    padding: 3mm 4mm;
+    font-size: 11pt;
+    font-weight: 700;
+    border-radius: 2mm;
+    margin-bottom: 5mm;
+  }
+  .psp-level1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3mm;
+    margin-bottom: 5mm;
+  }
+  .psp-wp {
+    border: 2px solid var(--accent);
+    border-radius: 2mm;
+    overflow: hidden;
+  }
+  .psp-wp-header {
+    background: var(--accent);
+    color: #fff;
+    padding: 2mm 3mm;
+    font-weight: 700;
+    font-size: 9pt;
+    text-align: center;
+  }
+  .psp-wp-body {
+    padding: 2mm 3mm;
+    font-size: 8.5pt;
+  }
+  .psp-wp-body ul {
+    list-style: none;
+    padding: 0;
+  }
+  .psp-wp-body li {
+    padding: 1mm 0;
+    border-bottom: 1px solid #eee;
+  }
+  .psp-wp-body li:last-child { border-bottom: none; }
+
+  .psp-tag {
+    display: inline-block;
+    font-size: 7pt;
+    font-weight: 700;
+    padding: 0.3mm 1.5mm;
+    border-radius: 1mm;
+    color: #fff;
+    margin-left: 1mm;
+    vertical-align: middle;
+  }
+  .tag-berater { background: var(--berater); }
+  .tag-pg { background: var(--pg); }
+  .tag-betreiber { background: var(--success); }
+  .tag-phase { background: var(--text-light); font-size: 7pt; }
+
+  /* Gantt-artige Phasenleiste */
+  .timeline {
+    margin: 5mm 0;
+    border: 1px solid var(--border);
+    border-radius: 2mm;
+    overflow: hidden;
+  }
+  .timeline-header {
+    display: grid;
+    grid-template-columns: 25% repeat(8, 1fr);
+    background: var(--primary);
+    color: #fff;
+    font-size: 7.5pt;
+    font-weight: 600;
+    text-align: center;
+  }
+  .timeline-header div { padding: 1.5mm 1mm; border-right: 1px solid rgba(255,255,255,0.2); }
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 25% repeat(8, 1fr);
+    font-size: 8pt;
+    border-bottom: 1px solid #eee;
+  }
+  .timeline-row:nth-child(even) { background: var(--light-bg); }
+  .timeline-label { padding: 1.5mm 2mm; font-weight: 600; color: var(--primary); }
+  .timeline-cell { padding: 1.5mm 0; text-align: center; }
+  .bar {
+    display: block;
+    height: 4mm;
+    border-radius: 1mm;
+    margin: 0 1mm;
+  }
+  .bar-berater { background: var(--berater); }
+  .bar-pg { background: var(--pg); }
+  .bar-betreiber { background: var(--success); }
+
+  /* To-Do Listen */
+  .todo-section {
+    margin: 4mm 0;
+    border: 1px solid var(--border);
+    border-radius: 2mm;
+    overflow: hidden;
+  }
+  .todo-header {
+    padding: 2.5mm 4mm;
+    font-weight: 700;
+    font-size: 10pt;
+    color: #fff;
+  }
+  .todo-header-berater { background: var(--berater); }
+  .todo-header-pg { background: var(--pg); }
+  .todo-header-betreiber { background: var(--success); }
+
+  .todo-phase {
+    background: var(--light-bg);
+    padding: 2mm 4mm;
+    font-weight: 700;
+    font-size: 9.5pt;
+    color: var(--primary);
+    border-bottom: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+  }
+
+  .todo-item {
+    display: grid;
+    grid-template-columns: 6mm 1fr 22mm 18mm 14mm;
+    padding: 2mm 4mm;
+    border-bottom: 1px solid #eee;
+    font-size: 9pt;
+    align-items: center;
+  }
+  .todo-item:nth-child(even) { background: #fdfdfd; }
+  .todo-check {
+    width: 4mm;
+    height: 4mm;
+    border: 1.5px solid var(--text-light);
+    border-radius: 0.5mm;
+  }
+  .todo-task { padding-right: 2mm; }
+  .todo-deadline { font-size: 8pt; font-weight: 600; color: var(--danger); text-align: center; }
+  .todo-target { font-size: 7.5pt; color: var(--text-light); text-align: center; }
+
+  .prio {
+    display: inline-block;
+    font-size: 7pt;
+    font-weight: 700;
+    padding: 0.3mm 1.5mm;
+    border-radius: 1mm;
+    color: #fff;
+    text-align: center;
+  }
+  .prio-a { background: var(--danger); }
+  .prio-b { background: var(--warning); }
+  .prio-c { background: var(--text-light); }
+
+  /* Legende */
+  .legend {
+    display: flex;
+    gap: 5mm;
+    margin: 4mm 0;
+    padding: 3mm 4mm;
+    background: var(--light-bg);
+    border-radius: 2mm;
+    font-size: 8.5pt;
+    flex-wrap: wrap;
+  }
+  .legend-item { display: flex; align-items: center; gap: 1.5mm; }
+  .legend-dot {
+    width: 3mm;
+    height: 3mm;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* Seitenumbruch */
+  .page-break { page-break-before: always; }
+
+  /* Footer */
+  .footer {
+    margin-top: 10mm;
+    padding-top: 3mm;
+    border-top: 1px solid var(--border);
+    font-size: 8.5pt;
+    color: var(--text-light);
+    text-align: center;
+  }
+
+  /* Notiz */
+  .note {
+    padding: 3mm 4mm;
+    border-radius: 2mm;
+    margin: 4mm 0;
+    font-size: 9pt;
+  }
+  .note-info { background: #eaf2f8; border-left: 4px solid var(--accent); }
+  .note-warn { background: #fef9e7; border-left: 4px solid var(--warning); }
+  .note-danger { background: #fadbd8; border-left: 4px solid var(--danger); }
+
+  @media print {
+    body { padding: 10mm 15mm; }
+    .page-break { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+<script>
+  if (sessionStorage.getItem('if25auth') !== '572c59856823eb9418594e39bdeca72b8008c0490a4e26ce2f3689ccd603c7c5') {
+    window.location.href = 'index.html';
+  }
+</script>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">IF25 NZT</a>
+  <a href="strukturplan.html" class="nav-active">Strukturplan &amp; To-Do</a>
+  <a href="phasenplan.html">Phasenplan</a>
+  <a href="reverion.html">Reverion</a>
+</nav>
+
+<!-- ==================== DECKBLATT ==================== -->
+<div class="cover">
+  <div class="cover-label">EU Innovation Fund IF25 &mdash; Net-Zero Technologies</div>
+  <h1>Projekt-Strukturplan &amp; To-Do-Listen</h1>
+  <h2>Biomethan-Konsortium Bayern &mdash; 8 Biogasanlagen, 1 zentraler Aufbereitungsstandort</h2>
+  <div class="cover-meta">
+    <strong>Erstellt von:</strong> Energieberatung Schwaigkofler GmbH<br>
+    <strong>Datum:</strong> 2. M&auml;rz 2026<br>
+    <strong>Antragsfrist:</strong> 23. April 2026<br>
+    <strong>Investitionsvolumen:</strong> ~15 Mio. EUR &bull; <strong>F&ouml;rderquote:</strong> bis 60%
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!--              TEIL 1: PROJEKT-STRUKTURPLAN                      -->
+<!-- ============================================================ -->
+<div class="section-banner">Teil 1 &mdash; Projekt-Strukturplan (PSP)</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--berater);"></div> Berater</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--pg);"></div> Projektgesellschaft</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--success);"></div> Betreiber (&times;8)</div>
+  <div class="legend-item"><span class="prio prio-a">A</span> Kritischer Pfad</div>
+  <div class="legend-item"><span class="prio prio-b">B</span> Wichtig, Puffer</div>
+  <div class="legend-item"><span class="prio prio-c">C</span> Nachlieferbar</div>
+</div>
+
+<!-- PSP-Wurzel -->
+<div class="psp-root">Innovation Fund IF25 NZT &mdash; Biomethan-Konsortium Bayern</div>
+
+<!-- Zeile 1: AP 1-3 -->
+<div class="psp-level1">
+  <div class="psp-wp">
+    <div class="psp-wp-header">AP 1 &mdash; Konsortium &amp; Gr&uuml;ndung</div>
+    <div class="psp-wp-body">
+      <ul>
+        <li>1.1 Gesellschaftsgr&uuml;ndung <span class="psp-tag tag-pg">PG</span> <span class="prio prio-a">A</span></li>
+        <li>1.2 PIC-Registrierung <span class="psp-tag tag-berater">Ber.</span> <span class="prio prio-a">A</span></li>
+        <li>1.3 LEAR + Account Admin <span class="psp-tag tag-pg">PG</span> <span class="prio prio-a">A</span></li>
+        <li>1.4 Letters of Intent (&times;8) <span class="psp-tag tag-betreiber">Betr.</span> <span class="prio prio-a">A</span></li>
+        <li>1.5 Gesellschaftsvertrag <span class="psp-tag tag-pg">PG</span> <span class="prio prio-a">A</span></li>
+        <li>1.6 Organigramm / Management <span class="psp-tag tag-pg">PG</span> <span class="prio prio-b">B</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="psp-wp">
+    <div class="psp-wp-header">AP 2 &mdash; Technologie &amp; Beschaffung</div>
+    <div class="psp-wp-body">
+      <ul>
+        <li>2.1 Reverion rSOC (Specs, LoS, KVA) <span class="psp-tag tag-pg">PG</span> <span class="prio prio-a">A</span></li>
+        <li>2.2 Membrananlage (2 Anbieter) <span class="psp-tag tag-berater">Ber.</span> <span class="prio prio-a">A</span></li>
+        <li>2.3 Leitungsbau 20 km (Planung, KVA) <span class="psp-tag tag-pg">PG</span> <span class="prio prio-b">B</span></li>
+        <li>2.4 CO2-Logistik (Verdichtung, LKW) <span class="psp-tag tag-pg">PG</span> <span class="prio prio-b">B</span></li>
+        <li>2.5 Netzbetreiber (Einspeisung) <span class="psp-tag tag-pg">PG</span> <span class="prio prio-b">B</span></li>
+        <li>2.6 CO2-Abnahme (LoI Brauerei) <span class="psp-tag tag-pg">PG</span> <span class="prio prio-a">A</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="psp-wp">
+    <div class="psp-wp-header">AP 3 &mdash; Anlagendaten &amp; Bestandsaufnahme</div>
+    <div class="psp-wp-body">
+      <ul>
+        <li>3.1 Datenblatt Biogasanlage (&times;8) <span class="psp-tag tag-betreiber">Betr.</span> <span class="prio prio-a">A</span></li>
+        <li>3.2 Erg&auml;nzende techn. Daten <span class="psp-tag tag-betreiber">Betr.</span> <span class="prio prio-b">B</span></li>
+        <li>3.3 Wirtschaftliche Zusatzdaten <span class="psp-tag tag-betreiber">Betr.</span> <span class="prio prio-b">B</span></li>
+        <li>3.4 Standortinfos (Fl&auml;che, Strom) <span class="psp-tag tag-betreiber">Betr.</span> <span class="prio prio-b">B</span></li>
+        <li>3.5 Foto-Dokumentation <span class="psp-tag tag-betreiber">Betr.</span> <span class="prio prio-c">C</span></li>
+        <li>3.6 Genehmigungsstatus (BImSchG) <span class="psp-tag tag-betreiber">Betr.</span> <span class="prio prio-a">A</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Zeile 2: AP 4-6 -->
+<div class="psp-level1">
+  <div class="psp-wp">
+    <div class="psp-wp-header">AP 4 &mdash; Finanzplanung</div>
+    <div class="psp-wp-body">
+      <ul>
+        <li>4.1 FIF (Financial Information File) <span class="psp-tag tag-berater">Ber.</span> <span class="prio prio-a">A</span></li>
+        <li>4.2 GHG Emission Avoidance Calc. <span class="psp-tag tag-berater">Ber.</span> <span class="prio prio-a">A</span></li>
+        <li>4.3 Finanzierungsplan (EK/FK) <span class="psp-tag tag-pg">PG</span> <span class="prio prio-b">B</span></li>
+        <li>4.4 Bankbest&auml;tigung <span class="psp-tag tag-pg">PG</span> <span class="prio prio-b">B</span></li>
+        <li>4.5 Genehmigungsstrategie <span class="psp-tag tag-pg">PG</span> <span class="prio prio-b">B</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="psp-wp">
+    <div class="psp-wp-header">AP 5 &mdash; Antragsdokumente</div>
+    <div class="psp-wp-body">
+      <ul>
+        <li>5.1 Part B &mdash; Techn. Beschreibung (70 S.) <span class="psp-tag tag-berater">Ber.</span> <span class="prio prio-a">A</span></li>
+        <li>5.2 Machbarkeitsstudie (60 S.) <span class="psp-tag tag-berater">Ber.</span> <span class="prio prio-a">A</span></li>
+        <li>5.3 Business Plan (60 S.) <span class="psp-tag tag-berater">Ber.</span> <span class="prio prio-a">A</span></li>
+        <li>5.4 Knowledge Sharing Plan <span class="psp-tag tag-berater">Ber.</span> <span class="prio prio-b">B</span></li>
+        <li>5.5 DNSH-Bewertung <span class="psp-tag tag-berater">Ber.</span> <span class="prio prio-b">B</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="psp-wp">
+    <div class="psp-wp-header">AP 6 &mdash; Review &amp; Einreichung</div>
+    <div class="psp-wp-body">
+      <ul>
+        <li>6.1 Konsistenzcheck (alle Dokumente) <span class="psp-tag tag-berater">Ber.</span> <span class="prio prio-a">A</span></li>
+        <li>6.2 Self-Check Questionnaire <span class="psp-tag tag-berater">Ber.</span> <span class="prio prio-a">A</span></li>
+        <li>6.3 Fachpr&uuml;fung durch Anbieter <span class="psp-tag tag-pg">PG</span> <span class="prio prio-b">B</span></li>
+        <li>6.4 Freigabe durch GF <span class="psp-tag tag-pg">PG</span> <span class="prio prio-a">A</span></li>
+        <li>6.5 Part A + Upload + Einreichung <span class="psp-tag tag-berater">Ber.</span> <span class="prio prio-a">A</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ==================== ZEITSTRAHL ==================== -->
+<div class="section-banner-sub">Zeitstrahl &mdash; Arbeitspakete nach Kalenderwochen</div>
+
+<div class="timeline">
+  <div class="timeline-header">
+    <div>Arbeitspaket</div>
+    <div>KW 9</div><div>KW 10</div><div>KW 11</div><div>KW 12</div>
+    <div>KW 13</div><div>KW 14</div><div>KW 15</div><div>KW 16</div>
+  </div>
+  <div class="timeline-header" style="background:var(--text-light); font-size:7pt;">
+    <div></div>
+    <div>24.2.</div><div>3.3.</div><div>10.3.</div><div>17.3.</div>
+    <div>24.3.</div><div>31.3.</div><div>7.4.</div><div>14.4.</div>
+  </div>
+
+  <div class="timeline-row">
+    <div class="timeline-label">AP 1 Konsortium</div>
+    <div class="timeline-cell"><span class="bar bar-pg"></span></div>
+    <div class="timeline-cell"><span class="bar bar-pg"></span></div>
+    <div class="timeline-cell"><span class="bar bar-pg" style="opacity:0.4"></span></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"><span class="bar bar-pg" style="opacity:0.4"></span></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"></div>
+  </div>
+  <div class="timeline-row">
+    <div class="timeline-label">AP 2 Technologie</div>
+    <div class="timeline-cell"><span class="bar bar-pg"></span></div>
+    <div class="timeline-cell"><span class="bar bar-pg"></span></div>
+    <div class="timeline-cell"><span class="bar bar-pg"></span></div>
+    <div class="timeline-cell"><span class="bar bar-pg"></span></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"></div>
+  </div>
+  <div class="timeline-row">
+    <div class="timeline-label">AP 3 Anlagendaten</div>
+    <div class="timeline-cell"><span class="bar bar-betreiber"></span></div>
+    <div class="timeline-cell"><span class="bar bar-betreiber"></span></div>
+    <div class="timeline-cell"><span class="bar bar-betreiber"></span></div>
+    <div class="timeline-cell"><span class="bar bar-betreiber" style="opacity:0.4"></span></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"><span class="bar bar-betreiber" style="opacity:0.4"></span></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"></div>
+  </div>
+  <div class="timeline-row">
+    <div class="timeline-label">AP 4 Finanzplanung</div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"><span class="bar bar-berater"></span></div>
+    <div class="timeline-cell"><span class="bar bar-berater"></span></div>
+    <div class="timeline-cell"><span class="bar bar-berater"></span></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"><span class="bar bar-pg" style="opacity:0.4"></span></div>
+  </div>
+  <div class="timeline-row">
+    <div class="timeline-label">AP 5 Antragsdokumente</div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"><span class="bar bar-berater" style="opacity:0.4"></span></div>
+    <div class="timeline-cell"><span class="bar bar-berater"></span></div>
+    <div class="timeline-cell"><span class="bar bar-berater"></span></div>
+    <div class="timeline-cell"><span class="bar bar-berater"></span></div>
+    <div class="timeline-cell"><span class="bar bar-berater"></span></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"></div>
+  </div>
+  <div class="timeline-row">
+    <div class="timeline-label">AP 6 Review &amp; Einr.</div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"></div>
+    <div class="timeline-cell"><span class="bar bar-berater"></span></div>
+    <div class="timeline-cell"><span class="bar bar-berater"></span></div>
+  </div>
+</div>
+
+<div class="note note-danger" style="margin-top:3mm; font-size: 8.5pt;">
+  <strong>KW 17 (14.&ndash;23. April):</strong> Finalisierung, Portal-Upload, Einreichung sp&auml;testens 22. April (1 Tag Puffer).
+  Farbintensit&auml;t zeigt Hauptaktivit&auml;t (dunkel) vs. Nacharbeiten (hell).
+</div>
+
+
+<!-- ============================================================ -->
+<!--              TEIL 2: TO-DO-LISTEN                              -->
+<!-- ============================================================ -->
+<div class="section-banner">Teil 2 &mdash; To-Do-Listen nach Verantwortlichkeit</div>
+
+<div class="note note-info">
+  Alle Aufgaben abgeleitet aus dem Datenanforderungen-Phasenplan und der Sofortma&szlig;nahmen-Checkliste.
+  <strong>Priorit&auml;t A</strong> = kritischer Pfad, <strong>B</strong> = wichtig mit Puffer, <strong>C</strong> = nachlieferbar.
+</div>
+
+
+<!-- ==================== BERATER ==================== -->
+<div class="todo-section">
+  <div class="todo-header todo-header-berater">To-Do-Liste BERATER (Energieberatung Schwaigkofler)</div>
+
+  <div class="todo-phase">Phase 1 &mdash; Gr&uuml;ndung &amp; Datenerhebung (KW 9&ndash;10, bis 13. M&auml;rz)</div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Projektstruktur und Antragsarchitektur aufsetzen</div><div class="todo-deadline">7. M&auml;rz</div><div class="todo-target">intern</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Vorlage Letter of Intent erstellen und an alle 8 Betreiber versenden</div><div class="todo-deadline">3. M&auml;rz</div><div class="todo-target">B-1.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Kooperationsanfrage + LoS-Vorlage an Reverion (Fabian Gohlke) senden</div><div class="todo-deadline">3. M&auml;rz</div><div class="todo-target">PG-1.3</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Kontaktaufnahme Membrananbieter 1 &mdash; Angebot anfordern</div><div class="todo-deadline">7. M&auml;rz</div><div class="todo-target">AP 2.2</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Kontaktaufnahme Membrananbieter 2 &mdash; Vergleichsangebot anfordern</div><div class="todo-deadline">7. M&auml;rz</div><div class="todo-target">AP 2.2</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">PIC-Registrierung der Projektgesellschaft durchf&uuml;hren (nach Gesellschaftsgr&uuml;ndung)</div><div class="todo-deadline">13. M&auml;rz</div><div class="todo-target">AP 1.2</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Datenblatt-Vorlage an alle 8 Betreiber versenden</div><div class="todo-deadline">3. M&auml;rz</div><div class="todo-target">B-1.2</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Erste Entw&uuml;rfe der Antragsdokumente vorbereiten</div><div class="todo-deadline">13. M&auml;rz</div><div class="todo-target">AP 5</div><div class="prio prio-b">B</div></div>
+
+  <div class="todo-phase">Phase 2 &mdash; Finanzplanung &amp; Berechnungen (KW 11&ndash;12, bis 27. M&auml;rz)</div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Financial Information File (FIF) erstellen und berechnen</div><div class="todo-deadline">27. M&auml;rz</div><div class="todo-target">AP 4.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">GHG Emission Avoidance Calculator ausf&uuml;llen</div><div class="todo-deadline">27. M&auml;rz</div><div class="todo-target">AP 4.2</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Machbarkeitsstudie fertigstellen (~60 Seiten)</div><div class="todo-deadline">27. M&auml;rz</div><div class="todo-target">AP 5.2</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Business Plan erstellen (Marktanalyse, Finanzmodell, ~60 Seiten)</div><div class="todo-deadline">27. M&auml;rz</div><div class="todo-target">AP 5.3</div><div class="prio prio-a">A</div></div>
+
+  <div class="todo-phase">Phase 3 &mdash; Hauptdokumente (KW 13&ndash;14, bis 10. April)</div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Part B &mdash; Technische Beschreibung fertigstellen (70 Seiten, 6 Abschnitte)</div><div class="todo-deadline">10. April</div><div class="todo-target">AP 5.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Knowledge Sharing Plan erstellen (~15 Seiten)</div><div class="todo-deadline">10. April</div><div class="todo-target">AP 5.4</div><div class="prio prio-b">B</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">DNSH-Bewertung erstellen (6 EU-Taxonomie-Umweltziele)</div><div class="todo-deadline">10. April</div><div class="todo-target">AP 5.5</div><div class="prio prio-b">B</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Arbeitspakete, Meilensteine, Gantt-Chart finalisieren</div><div class="todo-deadline">10. April</div><div class="todo-target">AP 5.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">FIF + GHG-Calculator finalisieren</div><div class="todo-deadline">10. April</div><div class="todo-target">AP 4</div><div class="prio prio-a">A</div></div>
+
+  <div class="todo-phase">Phase 4 &mdash; Review &amp; QS (KW 15&ndash;16, bis 18. April)</div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Konsistenzcheck: Part B &harr; FIF &harr; GHG &harr; Machbarkeitsstudie &harr; Business Plan</div><div class="todo-deadline">15. April</div><div class="todo-target">AP 6.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Self-Check Questionnaire (CINEA) ausf&uuml;llen</div><div class="todo-deadline">15. April</div><div class="todo-target">AP 6.2</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Fachliche Pr&uuml;fung durch Reverion + Membrananbieter organisieren</div><div class="todo-deadline">15. April</div><div class="todo-target">AP 6.3</div><div class="prio prio-b">B</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Letzte Korrekturen und Feinschliff</div><div class="todo-deadline">18. April</div><div class="todo-target">AP 6</div><div class="prio prio-a">A</div></div>
+
+  <div class="todo-phase">Phase 5 &mdash; Finalisierung &amp; Einreichung (KW 17, bis 23. April)</div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Finale &Uuml;berarbeitung aller Dokumente</div><div class="todo-deadline">20. April</div><div class="todo-target">AP 6</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">&Uuml;bersetzung ins Englische (Part B + ggf. weitere)</div><div class="todo-deadline">20. April</div><div class="todo-target">AP 5.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Alle PDFs und Excel-Dateien finalisieren</div><div class="todo-deadline">21. April</div><div class="todo-target">AP 6</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Part A (Administrative Forms) im Portal ausf&uuml;llen</div><div class="todo-deadline">21. April</div><div class="todo-target">AP 6.5</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Test-Upload im Portal (mind. 1 Tag vor Einreichung)</div><div class="todo-deadline">21. April</div><div class="todo-target">AP 6.5</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task"><strong>EINREICHUNG auf EU Funding &amp; Tenders Portal</strong></div><div class="todo-deadline"><strong>22. April</strong></div><div class="todo-target">AP 6.5</div><div class="prio prio-a">A</div></div>
+</div>
+
+
+<!-- ==================== PROJEKTGESELLSCHAFT ==================== -->
+<div class="page-break"></div>
+<div class="todo-section">
+  <div class="todo-header todo-header-pg">To-Do-Liste PROJEKTGESELLSCHAFT (GF / Gesch&auml;ftsf&uuml;hrer)</div>
+
+  <div class="todo-phase">Phase 1 &mdash; Gr&uuml;ndung &amp; Datenerhebung (KW 9&ndash;10, bis 13. M&auml;rz)</div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Rechtsform festlegen (Empfehlung: GmbH &amp; Co. KG)</div><div class="todo-deadline">7. M&auml;rz</div><div class="todo-target">PG-1.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Notar / Jurist f&uuml;r Gesellschaftsvertrag beauftragen</div><div class="todo-deadline">7. M&auml;rz</div><div class="todo-target">PG-1.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Gesellschaftsvertrag entwerfen (mind. Entwurf)</div><div class="todo-deadline">7. M&auml;rz</div><div class="todo-target">PG-1.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Gesch&auml;ftsf&uuml;hrer / vertretungsberechtigte Person bestimmen</div><div class="todo-deadline">7. M&auml;rz</div><div class="todo-target">PG-1.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Firmierung (Name) und Sitz (Adresse) festlegen</div><div class="todo-deadline">7. M&auml;rz</div><div class="todo-target">PG-1.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">LEAR-Ernennung abschlie&szlig;en (nach PIC-Registrierung durch Berater)</div><div class="todo-deadline">13. M&auml;rz</div><div class="todo-target">PG-1.2</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Berater (A. Schwaigkofler) als Account Administrator im Portal einrichten</div><div class="todo-deadline">13. M&auml;rz</div><div class="todo-target">PG-1.2</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Anfrage an Reverion GmbH senden (Vorlage vom Berater)</div><div class="todo-deadline">7. M&auml;rz</div><div class="todo-target">PG-1.3</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Netzbetreiber kontaktieren &mdash; Einspeisebereitschaft anfragen</div><div class="todo-deadline">13. M&auml;rz</div><div class="todo-target">PG-1.4</div><div class="prio prio-b">B</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Ingenieurb&uuml;ro f&uuml;r Trassenplanung 20 km Leitung beauftragen</div><div class="todo-deadline">13. M&auml;rz</div><div class="todo-target">PG-1.5</div><div class="prio prio-b">B</div></div>
+
+  <div class="todo-phase">Phase 2 &mdash; Finanzplanung &amp; Berechnungen (KW 11&ndash;12, bis 27. M&auml;rz)</div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Kostenvoranschlag Reverion rSOC erhalten</div><div class="todo-deadline">20. M&auml;rz</div><div class="todo-target">PG-2.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Kostenvoranschlag Leitungsbau + Verdichterstation erhalten</div><div class="todo-deadline">20. M&auml;rz</div><div class="todo-target">PG-2.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Kostenvoranschlag CO2-Verdichtung/-Speicherung + LKW erhalten</div><div class="todo-deadline">20. M&auml;rz</div><div class="todo-target">PG-2.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Letter of Support Reverion (unterschrieben, auf Briefpapier) erhalten</div><div class="todo-deadline">20. M&auml;rz</div><div class="todo-target">PG-2.2</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">CO2-Abnahme LoI (Brauerei / Getr&auml;nkehersteller / H&auml;ndler) einholen</div><div class="todo-deadline">24. M&auml;rz</div><div class="todo-target">PG-2.3</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Schriftliche Best&auml;tigung Netzbetreiber (Einspeisezusage)</div><div class="todo-deadline">24. M&auml;rz</div><div class="todo-target">PG-2.5</div><div class="prio prio-b">B</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Finanzierungsplan: EK-Aufteilung, FK-Gespr&auml;che (KfW 270, Hausbank)</div><div class="todo-deadline">27. M&auml;rz</div><div class="todo-target">PG-2.4</div><div class="prio prio-b">B</div></div>
+
+  <div class="todo-phase">Phase 3 &mdash; Hauptdokumente (KW 13&ndash;14, bis 10. April)</div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Gesellschaftsvertrag (Entwurf) vom Notar/Juristen vorlegen</div><div class="todo-deadline">3. April</div><div class="todo-target">PG-3.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Organigramm + Kurzlebensl&auml;ufe Schl&uuml;sselpersonen</div><div class="todo-deadline">3. April</div><div class="todo-target">PG-3.2</div><div class="prio prio-b">B</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Genehmigungsstrategie dokumentieren (BImSchG, Leitung, Zeitplan)</div><div class="todo-deadline">7. April</div><div class="todo-target">PG-3.3</div><div class="prio prio-b">B</div></div>
+
+  <div class="todo-phase">Phase 4 &mdash; Review &amp; QS (KW 15&ndash;16, bis 18. April)</div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Antragsdokumente pr&uuml;fen (Part B, Machbarkeitsstudie, Business Plan)</div><div class="todo-deadline">15. April</div><div class="todo-target">PG-4.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Finanzielle Angaben auf Korrektheit pr&uuml;fen</div><div class="todo-deadline">15. April</div><div class="todo-target">PG-4.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Schriftliche Freigabe zur Einreichung erteilen</div><div class="todo-deadline">15. April</div><div class="todo-target">PG-4.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Vollst&auml;ndigkeit aller unterst&uuml;tzenden Dokumente pr&uuml;fen (7-Punkte-Checkliste)</div><div class="todo-deadline">15. April</div><div class="todo-target">PG-4.2</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Bankbest&auml;tigung / Finanzierungszusage vorlegen</div><div class="todo-deadline">15. April</div><div class="todo-target">PG-4.3</div><div class="prio prio-b">B</div></div>
+
+  <div class="todo-phase">Phase 5 &mdash; Finalisierung &amp; Einreichung (KW 17, bis 23. April)</div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Best&auml;tigen: LEAR abgeschlossen + Account Admin eingerichtet</div><div class="todo-deadline">18. April</div><div class="todo-target">PG-5.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">PIC-Nummer best&auml;tigen</div><div class="todo-deadline">18. April</div><div class="todo-target">PG-5.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task"><strong>Finale Unterschrift / Freigabe zur Einreichung</strong></div><div class="todo-deadline"><strong>21. April</strong></div><div class="todo-target">PG-5.2</div><div class="prio prio-a">A</div></div>
+</div>
+
+
+<!-- ==================== BETREIBER ==================== -->
+<div class="page-break"></div>
+<div class="todo-section">
+  <div class="todo-header todo-header-betreiber">To-Do-Liste BETREIBER (jeder der 8 Biogasanlagenbetreiber)</div>
+
+  <div class="todo-phase">Phase 1 &mdash; Gr&uuml;ndung &amp; Datenerhebung (KW 9&ndash;10, bis 13. M&auml;rz)</div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Letter of Intent (LoI) unterschreiben und zur&uuml;cksenden</div><div class="todo-deadline">7. M&auml;rz</div><div class="todo-target">B-1.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Datenblatt Biogasanlage vollst&auml;ndig ausf&uuml;llen (Vorlage vom Berater)</div><div class="todo-deadline">10. M&auml;rz</div><div class="todo-target">B-1.2</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item" style="padding-left:10mm;"><div class="todo-check"></div><div class="todo-task">&mdash; a) Betreiberinformationen (Name, Rechtsform, HRB, USt-ID)</div><div class="todo-deadline"></div><div class="todo-target"></div><div></div></div>
+  <div class="todo-item" style="padding-left:10mm;"><div class="todo-check"></div><div class="todo-task">&mdash; b) Anlagenstandort (Adresse, GPS-Koordinaten, Landkreis)</div><div class="todo-deadline"></div><div class="todo-target"></div><div></div></div>
+  <div class="todo-item" style="padding-left:10mm;"><div class="todo-check"></div><div class="todo-task">&mdash; c) Technische Daten (Leistung kW, Biogasproduktion Nm&sup3;/h, CH4-%)</div><div class="todo-deadline"></div><div class="todo-target"></div><div></div></div>
+  <div class="todo-item" style="padding-left:10mm;"><div class="todo-check"></div><div class="todo-task">&mdash; d) Substratmix (Art, Menge t/a, Herkunft)</div><div class="todo-deadline"></div><div class="todo-target"></div><div></div></div>
+  <div class="todo-item" style="padding-left:10mm;"><div class="todo-check"></div><div class="todo-task">&mdash; e) Bestandsanlagen (Fermenter, BHKW, Gasspeicher)</div><div class="todo-deadline"></div><div class="todo-target"></div><div></div></div>
+  <div class="todo-item" style="padding-left:10mm;"><div class="todo-check"></div><div class="todo-task">&mdash; f) Energie (Eigenstrom, Einspeisung, EEG-Verg&uuml;tung, Flex-Pr&auml;mie)</div><div class="todo-deadline"></div><div class="todo-target"></div><div></div></div>
+  <div class="todo-item" style="padding-left:10mm;"><div class="todo-check"></div><div class="todo-task">&mdash; g) Genehmigungsstatus (BImSchG, UVP, Natura-2000, Wasserschutz)</div><div class="todo-deadline"></div><div class="todo-target"></div><div></div></div>
+  <div class="todo-item" style="padding-left:10mm;"><div class="todo-check"></div><div class="todo-task">&mdash; h) Wirtschaftliche Daten (Umsatz, Kosten, Restbuchwert, Kredite)</div><div class="todo-deadline"></div><div class="todo-target"></div><div></div></div>
+
+  <div class="todo-phase">Phase 2 &mdash; Finanzplanung &amp; Berechnungen (KW 11&ndash;12, bis 27. M&auml;rz)</div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Erg&auml;nzende technische Daten: Methan-Emissionen, Gasdichtheit, Gasanalyse</div><div class="todo-deadline">17. M&auml;rz</div><div class="todo-target">B-2.1</div><div class="prio prio-b">B</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Wirtschaftliche Zusatzdaten: EEG-Abrechnung, Wartungsvertr&auml;ge, Versicherung</div><div class="todo-deadline">20. M&auml;rz</div><div class="todo-target">B-2.2</div><div class="prio prio-b">B</div></div>
+
+  <div class="todo-phase">Phase 3 &mdash; Hauptdokumente (KW 13&ndash;14, bis 10. April)</div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Standortspezifische Infos: Fl&auml;che (m&sup2;), Stromanschluss, Wasser, LKW-Zufahrt</div><div class="todo-deadline">3. April</div><div class="todo-target">B-3.1</div><div class="prio prio-b">B</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Foto-Dokumentation: 2&ndash;3 Fotos Anlage + 1 Foto geplanter Aufstellort</div><div class="todo-deadline">7. April</div><div class="todo-target">B-3.2</div><div class="prio prio-c">C</div></div>
+
+  <div class="todo-phase">Phase 4 &mdash; Review &amp; QS (KW 15&ndash;16, bis 18. April)</div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Zusammenfassung der eigenen Anlagendaten im Antrag pr&uuml;fen + best&auml;tigen</div><div class="todo-deadline">14. April</div><div class="todo-target">B-4.1</div><div class="prio prio-b">B</div></div>
+
+  <div class="todo-phase">Phase 5 &mdash; Finalisierung &amp; Einreichung (KW 17, bis 23. April)</div>
+  <div style="padding: 3mm 4mm; font-style: italic; color: var(--text-light); font-size: 9pt;">
+    Keine weiteren Zulieferungen erforderlich.
+  </div>
+</div>
+
+
+<!-- ==================== CHECKLISTE UNTERLAGEN ==================== -->
+<div class="page-break"></div>
+<div class="section-banner-sub">Checkliste &mdash; Vollst&auml;ndigkeit aller Unterlagen vor Einreichung</div>
+
+<div class="note note-warn" style="margin-bottom: 4mm;">
+  Alle folgenden Unterlagen m&uuml;ssen sp&auml;testens am <strong>15. April 2026</strong> vorliegen.
+  Ohne vollst&auml;ndige Unterlagen ist keine Einreichung m&ouml;glich.
+</div>
+
+<div class="todo-section">
+  <div class="todo-header" style="background: var(--primary);">Antragsdokumente (erstellt vom Berater)</div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Part B &mdash; Technische Beschreibung (max. 70 Seiten, PDF)</div><div class="todo-deadline">10. April</div><div class="todo-target">AP 5.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Machbarkeitsstudie (max. 60 Seiten, PDF)</div><div class="todo-deadline">27. M&auml;rz</div><div class="todo-target">AP 5.2</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Business Plan (max. 60 Seiten, PDF)</div><div class="todo-deadline">27. M&auml;rz</div><div class="todo-target">AP 5.3</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Financial Information File (FIF, Excel)</div><div class="todo-deadline">27. M&auml;rz</div><div class="todo-target">AP 4.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">GHG Emission Avoidance Calculator (Excel)</div><div class="todo-deadline">27. M&auml;rz</div><div class="todo-target">AP 4.2</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Knowledge Sharing Plan (PDF)</div><div class="todo-deadline">10. April</div><div class="todo-target">AP 5.4</div><div class="prio prio-b">B</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">DNSH-Bewertung (PDF)</div><div class="todo-deadline">10. April</div><div class="todo-target">AP 5.5</div><div class="prio prio-b">B</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Part A &mdash; Administrative Forms (online im Portal)</div><div class="todo-deadline">21. April</div><div class="todo-target">AP 6.5</div><div class="prio prio-a">A</div></div>
+</div>
+
+<div class="todo-section" style="margin-top: 4mm;">
+  <div class="todo-header" style="background: var(--primary);">Unterst&uuml;tzende Dokumente (geliefert von PG / Betreibern / Dritten)</div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Letters of Intent &mdash; alle 8 Betreiber (unterschrieben)</div><div class="todo-deadline">7. M&auml;rz</div><div class="todo-target">B-1.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Letter of Support &mdash; Reverion GmbH (auf Briefpapier, unterschrieben)</div><div class="todo-deadline">20. M&auml;rz</div><div class="todo-target">PG-2.2</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Absichtserkl&auml;rung CO2-Abnehmer (Brauerei / H&auml;ndler)</div><div class="todo-deadline">24. M&auml;rz</div><div class="todo-target">PG-2.3</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Best&auml;tigung Netzbetreiber (Einspeisezusage)</div><div class="todo-deadline">24. M&auml;rz</div><div class="todo-target">PG-2.5</div><div class="prio prio-b">B</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Gesellschaftsvertrag (Entwurf)</div><div class="todo-deadline">3. April</div><div class="todo-target">PG-3.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">PIC-Registrierung abgeschlossen + LEAR validiert</div><div class="todo-deadline">13. M&auml;rz</div><div class="todo-target">PG-1.2</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Kostenvoranschl&auml;ge (Reverion, Membran, Leitung, CO2, LKW)</div><div class="todo-deadline">20. M&auml;rz</div><div class="todo-target">PG-2.1</div><div class="prio prio-a">A</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Bankbest&auml;tigung / Finanzierungszusage</div><div class="todo-deadline">15. April</div><div class="todo-target">PG-4.3</div><div class="prio prio-b">B</div></div>
+  <div class="todo-item"><div class="todo-check"></div><div class="todo-task">Ggf. UVP-Vorpr&uuml;fung / Natura-2000-Check</div><div class="todo-deadline">15. April</div><div class="todo-target">PG-4.2</div><div class="prio prio-c">C</div></div>
+</div>
+
+
+<!-- ==================== FOOTER ==================== -->
+<div class="footer">
+  Energieberatung Schwaigkofler GmbH &bull; Poststrasse 2 &bull; FL-9491 Ruggell &bull;
+  info@schwaigkofler.org &bull; +49 821 567 316 77
+</div>
+
+</body>
+</html>

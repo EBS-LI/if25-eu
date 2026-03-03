@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Datenanforderungen und Zulieferplan — EU Innovation Fund IF25 NZT</title>
+<style>
+  /* ========== NAVIGATION ========== */
+  .site-nav {
+    background: #1a3a5c;
+    padding: 8px 15mm;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .site-nav a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 9.5pt;
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .site-nav a:hover { background: rgba(255,255,255,0.15); color: #fff; }
+  .site-nav a.nav-active { background: #2980b9; color: #fff; font-weight: 600; }
+  .site-nav .nav-brand {
+    font-weight: 700;
+    color: #fff;
+    font-size: 10pt;
+    margin-right: 10px;
+    padding-right: 15px;
+    border-right: 1px solid rgba(255,255,255,0.3);
+  }
+  @media print { .site-nav { display: none; } }
+</style>
+<style>
+  /* ========== GRUNDLAGEN ========== */
+  :root {
+    --primary: #1a3a5c;
+    --accent: #2980b9;
+    --success: #27ae60;
+    --warning: #e67e22;
+    --danger: #c0392b;
+    --light-bg: #f8f9fa;
+    --border: #dde1e5;
+    --text: #2c3e50;
+    --text-light: #5d6d7e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: var(--text);
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 15mm 18mm;
+    background: #fff;
+  }
+
+  /* ========== DECKBLATT ========== */
+  .cover {
+    text-align: center;
+    padding: 40mm 0 30mm 0;
+    border-bottom: 3px solid var(--primary);
+    margin-bottom: 10mm;
+  }
+  .cover-label {
+    font-size: 11pt;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 8mm;
+  }
+  .cover h1 {
+    font-size: 22pt;
+    color: var(--primary);
+    margin-bottom: 6mm;
+    line-height: 1.25;
+  }
+  .cover h2 {
+    font-size: 13pt;
+    color: var(--text-light);
+    font-weight: 400;
+    margin-bottom: 15mm;
+  }
+  .cover-meta {
+    font-size: 10pt;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+  .cover-meta strong { color: var(--text); }
+
+  /* ========== INHALTSVERZEICHNIS ========== */
+  .toc {
+    background: var(--light-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6mm 8mm;
+    margin-bottom: 8mm;
+  }
+  .toc h2 {
+    font-size: 13pt;
+    color: var(--primary);
+    margin-bottom: 4mm;
+    border: none;
+    padding: 0;
+  }
+  .toc ul { list-style: none; padding-left: 0; }
+  .toc li { padding: 1.2mm 0; }
+  .toc a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--border);
+  }
+  .toc a:hover { color: var(--accent); }
+  .toc .toc-phase { font-weight: 600; margin-top: 2mm; }
+  .toc .toc-sub { padding-left: 6mm; font-size: 9.5pt; color: var(--text-light); }
+
+  /* ========== UEBERSCHRIFTEN ========== */
+  h1 {
+    font-size: 18pt;
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 3mm;
+    margin: 10mm 0 5mm 0;
+  }
+  h2 {
+    font-size: 13pt;
+    color: var(--primary);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2mm;
+    margin: 8mm 0 4mm 0;
+  }
+  h3 {
+    font-size: 11pt;
+    color: var(--accent);
+    margin: 5mm 0 2.5mm 0;
+  }
+  h4 {
+    font-size: 10.5pt;
+    color: var(--text);
+    margin: 3mm 0 1.5mm 0;
+  }
+
+  /* ========== PHASE-BANNER ========== */
+  .phase-banner {
+    background: var(--primary);
+    color: #fff;
+    padding: 4mm 6mm;
+    border-radius: 4px;
+    margin: 10mm 0 5mm 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .phase-banner h1 {
+    color: #fff;
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-size: 14pt;
+  }
+  .phase-banner .phase-dates {
+    font-size: 9.5pt;
+    opacity: 0.85;
+    white-space: nowrap;
+  }
+
+  /* ========== ROLLEN-ABSCHNITTE ========== */
+  .role-section {
+    border-left: 3px solid var(--border);
+    padding-left: 5mm;
+    margin: 4mm 0;
+  }
+  .role-section.berater { border-left-color: var(--text-light); }
+  .role-section.pg { border-left-color: var(--accent); }
+  .role-section.betreiber { border-left-color: var(--success); }
+
+  .role-header {
+    display: inline-block;
+    padding: 1mm 3mm;
+    border-radius: 3px;
+    font-size: 9pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2mm;
+  }
+  .role-header.berater { background: #ebedef; color: var(--text-light); }
+  .role-header.pg { background: #d6eaf8; color: #1a5276; }
+  .role-header.betreiber { background: #d5f5e3; color: #196f3d; }
+
+  /* ========== AUFGABEN-BLOECKE ========== */
+  .task-block {
+    background: var(--light-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4mm 5mm;
+    margin: 3mm 0;
+  }
+  .task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2mm;
+    flex-wrap: wrap;
+    gap: 2mm;
+  }
+  .task-id {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 9pt;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .task-title {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* Prioritaeten */
+  .prio {
+    display: inline-block;
+    padding: 0.5mm 2.5mm;
+    border-radius: 3px;
+    font-size: 8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .prio-a { background: #fadbd8; color: var(--danger); }
+  .prio-b { background: #fdebd0; color: #b7791f; }
+  .prio-c { background: #d5f5e3; color: #196f3d; }
+
+  .task-meta {
+    font-size: 9pt;
+    color: var(--text-light);
+    margin-bottom: 2mm;
+  }
+  .task-meta strong { color: var(--text); }
+
+  /* ========== TABELLEN ========== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 3mm 0;
+    font-size: 9.5pt;
+  }
+  thead th {
+    background: var(--primary);
+    color: #fff;
+    padding: 2.5mm 3mm;
+    text-align: left;
+    font-weight: 600;
+    font-size: 9pt;
+  }
+  tbody td {
+    padding: 2mm 3mm;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: var(--light-bg); }
+  tbody tr:hover { background: #eaf2f8; }
+
+  .table-compact td, .table-compact th { padding: 1.5mm 2.5mm; }
+
+  /* Checkbox-Spalte */
+  .col-check { width: 20mm; text-align: center; }
+
+  /* ========== LISTEN ========== */
+  ul, ol { padding-left: 6mm; margin: 2mm 0; }
+  li { margin-bottom: 1mm; }
+
+  /* ========== HINWEISE UND WARNUNGEN ========== */
+  .note {
+    border-radius: 4px;
+    padding: 3mm 5mm;
+    margin: 4mm 0;
+    font-size: 9.5pt;
+  }
+  .note-info {
+    background: #d6eaf8;
+    border-left: 4px solid var(--accent);
+  }
+  .note-warning {
+    background: #fef9e7;
+    border-left: 4px solid var(--warning);
+  }
+  .note-danger {
+    background: #fadbd8;
+    border-left: 4px solid var(--danger);
+  }
+  .note strong { display: block; margin-bottom: 1mm; }
+
+  /* ========== LEGENDE ========== */
+  .legend {
+    display: flex;
+    gap: 5mm;
+    flex-wrap: wrap;
+    margin: 3mm 0;
+    font-size: 9pt;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+  }
+
+  /* ========== FOOTER ========== */
+  .footer {
+    margin-top: 10mm;
+    padding-top: 4mm;
+    border-top: 1px solid var(--border);
+    font-size: 9pt;
+    color: var(--text-light);
+    text-align: center;
+  }
+
+  /* ========== DRUCK-OPTIMIERUNG ========== */
+  @media print {
+    body {
+      padding: 0;
+      font-size: 10pt;
+    }
+    .cover { padding: 30mm 0 25mm 0; }
+    .phase-banner { break-before: page; }
+    .task-block { break-inside: avoid; }
+    table { break-inside: avoid; }
+    .note { break-inside: avoid; }
+    .no-break { break-inside: avoid; }
+    a { color: var(--text) !important; text-decoration: none !important; }
+    tbody tr:hover { background: inherit; }
+
+    @page {
+      size: A4;
+      margin: 18mm 15mm 20mm 15mm;
+      @bottom-center {
+        content: counter(page);
+        font-size: 9pt;
+        color: #999;
+      }
+    }
+  }
+</style>
+</head>
+<body>
+<script>
+  if (sessionStorage.getItem('if25auth') !== '572c59856823eb9418594e39bdeca72b8008c0490a4e26ce2f3689ccd603c7c5') {
+    window.location.href = 'index.html';
+  }
+</script>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">IF25 NZT</a>
+  <a href="strukturplan.html">Strukturplan &amp; To-Do</a>
+  <a href="phasenplan.html" class="nav-active">Phasenplan</a>
+  <a href="reverion.html">Reverion</a>
+</nav>
+
+<!-- ==================== DECKBLATT ==================== -->
+<div class="cover">
+  <div class="cover-label">EU Innovation Fund IF25 NZT &mdash; Small-Scale</div>
+  <h1>Datenanforderungen<br>und Zulieferplan</h1>
+  <h2>Biomethan-Konsortium Bayern &mdash;<br>Integrierte Biogasaufbereitung mit innovativer CO2-Abscheidung</h2>
+  <div class="cover-meta">
+    <strong>Von:</strong> Alexander Schwaigkofler, Energieberatung Schwaigkofler GmbH<br>
+    <strong>An:</strong> Projektgesellschaft (i.Gr.) und alle 8 Biogasanlagenbetreiber<br>
+    <strong>Datum:</strong> 2. M&auml;rz 2026<br>
+    <strong>Antragsfrist:</strong> 23. April 2026, 17:00 CET
+  </div>
+</div>
+
+<!-- ==================== UEBERBLICK ==================== -->
+<div class="note note-info">
+  <strong>Zweck dieses Dokuments</strong>
+  Dieses Dokument beschreibt vollst&auml;ndig, welche Daten und Unterlagen wir in welcher
+  Projektphase von Ihnen ben&ouml;tigen, um den EU-F&ouml;rderantrag fristgerecht einzureichen.
+  <em>Ohne vollst&auml;ndige und rechtzeitige Zulieferung kann der Antrag nicht fristgerecht
+  gestellt werden.</em>
+</div>
+
+<!-- ==================== LEGENDE ==================== -->
+<h2>Legende</h2>
+<div class="legend">
+  <div class="legend-item"><span class="role-header pg">PG</span> = Projektgesellschaft (das neue gemeinsame Unternehmen)</div>
+  <div class="legend-item"><span class="role-header betreiber">Betreiber</span> = Jeder der 8 Biogasanlagenbetreiber einzeln</div>
+</div>
+<div class="legend" style="margin-top:1mm;">
+  <div class="legend-item"><span class="prio prio-a">Priorit&auml;t A</span> Ohne dieses Dokument geht nichts weiter (kritischer Pfad)</div>
+  <div class="legend-item"><span class="prio prio-b">Priorit&auml;t B</span> Wichtig, aber einige Tage Puffer m&ouml;glich</div>
+  <div class="legend-item"><span class="prio prio-c">Priorit&auml;t C</span> Kann ggf. mit Platzhalter arbeiten</div>
+</div>
+
+<!-- ==================== INHALTSVERZEICHNIS ==================== -->
+<div class="toc">
+  <h2>Inhalt</h2>
+  <ul>
+    <li class="toc-phase"><a href="#phase1">Phase 1 &mdash; Gr&uuml;ndung und Datenerhebung (KW 9&ndash;10, bis 13. M&auml;rz)</a></li>
+    <li class="toc-sub"><a href="#phase1-pg">Zulieferung Projektgesellschaft</a> &middot; <a href="#phase1-b">Zulieferung Betreiber</a></li>
+    <li class="toc-phase"><a href="#phase2">Phase 2 &mdash; Finanzplanung und Berechnungen (KW 11&ndash;12, bis 27. M&auml;rz)</a></li>
+    <li class="toc-sub"><a href="#phase2-pg">Zulieferung Projektgesellschaft</a> &middot; <a href="#phase2-b">Zulieferung Betreiber</a></li>
+    <li class="toc-phase"><a href="#phase3">Phase 3 &mdash; Antragstellung und Hauptdokumente (KW 13&ndash;14, bis 10. April)</a></li>
+    <li class="toc-sub"><a href="#phase3-pg">Zulieferung Projektgesellschaft</a> &middot; <a href="#phase3-b">Zulieferung Betreiber</a></li>
+    <li class="toc-phase"><a href="#phase4">Phase 4 &mdash; Review und Qualit&auml;tssicherung (KW 15&ndash;16, bis 18. April)</a></li>
+    <li class="toc-sub"><a href="#phase4-pg">Zulieferung Projektgesellschaft</a> &middot; <a href="#phase4-b">Zulieferung Betreiber</a></li>
+    <li class="toc-phase"><a href="#phase5">Phase 5 &mdash; Finalisierung und Einreichung (KW 17, bis 23. April)</a></li>
+    <li class="toc-phase" style="margin-top:3mm;"><a href="#dokumente">Zusammenfassung: Daten nach Ziel-Dokument</a></li>
+    <li class="toc-phase"><a href="#deadlines">Alle Deadlines auf einen Blick</a></li>
+    <li class="toc-phase"><a href="#kritisch">Kritischer Pfad</a></li>
+    <li class="toc-phase"><a href="#glossar">Glossar / Abk&uuml;rzungsverzeichnis</a></li>
+  </ul>
+</div>
+
+
+<!-- ============================================================ -->
+<!--                         PHASE 1                               -->
+<!-- ============================================================ -->
+<div class="phase-banner" id="phase1">
+  <h1>Phase 1 &mdash; Gr&uuml;ndung und Datenerhebung</h1>
+  <div class="phase-dates">KW 9&ndash;10 &bull; bis 13. M&auml;rz 2026</div>
+</div>
+
+<div class="role-section berater">
+  <span class="role-header berater">Was wir (Berater) in dieser Phase tun</span>
+  <ul>
+    <li>Projektstruktur und Antragsarchitektur aufsetzen</li>
+    <li>Vorlage Letter of Intent erstellen und an Betreiber versenden</li>
+    <li>Vorlage Letter of Support an Reverion GmbH senden</li>
+    <li>Kontaktaufnahme mit Membrantechnologie-Anbietern (mind. 2 Angebote)</li>
+    <li>PIC-Registrierung der Projektgesellschaft auf dem EU Funding &amp; Tenders Portal durchf&uuml;hren
+      (Voraussetzung: Gesellschaftsgr&uuml;ndung abgeschlossen, Daten aus PG-1.1)</li>
+    <li>Erste Entw&uuml;rfe der Antragsdokumente vorbereiten</li>
+  </ul>
+</div>
+
+<!-- PG Phase 1 -->
+<div class="role-section pg" id="phase1-pg">
+  <span class="role-header pg">Projektgesellschaft</span>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-1.1</span> &ensp; <span class="task-title">Gesellschaftsgr&uuml;ndung</span></div>
+      <span class="prio prio-a">Priorit&auml;t A</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Antragstellung (Part A), PIC-Registrierung &emsp;
+      <strong>Deadline:</strong> 7. M&auml;rz 2026
+    </div>
+    <ul>
+      <li>Rechtsform der Gesellschaft festlegen (Empfehlung: GmbH &amp; Co. KG)</li>
+      <li>Notar / Jurist f&uuml;r Gesellschaftsvertrag beauftragen</li>
+      <li>Gesellschaftsvertrag entwerfen (mind. Entwurf)</li>
+      <li>Gesch&auml;ftsf&uuml;hrer / vertretungsberechtigte Person bestimmen</li>
+      <li>Firmierung (Name der Gesellschaft) festlegen</li>
+      <li>Sitz der Gesellschaft (Adresse) festlegen</li>
+    </ul>
+  </div>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-1.2</span> &ensp; <span class="task-title">LEAR-Ernennung und Account Administrator einrichten</span></div>
+      <span class="prio prio-a">Priorit&auml;t A</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Antragstellung &mdash; ohne LEAR-Validierung keine Einreichung m&ouml;glich! &emsp;
+      <strong>Deadline:</strong> Sobald PIC-Registrierung abgeschlossen (durch Berater)
+    </div>
+    <ul>
+      <li>Die PIC-Registrierung wird vom Berater durchgef&uuml;hrt &mdash; hierf&uuml;r keine Aktion n&ouml;tig</li>
+      <li>Nach erfolgter PIC-Registrierung: Geschäftsf&uuml;hrer erh&auml;lt E-Mail von der EU zur LEAR-Ernennung</li>
+      <li>Geschäftsf&uuml;hrer muss den LEAR-Schritt (Legal Entity Appointed Representative) im Portal abschlie&szlig;en</li>
+      <li>Berater (Alexander Schwaigkofler) als <strong>Account Administrator</strong> im Portal einrichten</li>
+      <li>LEAR-Validierung kann bis zu 2 Wochen dauern &mdash; daher z&uuml;gig erledigen!</li>
+    </ul>
+  </div>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-1.3</span> &ensp; <span class="task-title">Kontakt Reverion GmbH</span></div>
+      <span class="prio prio-a">Priorit&auml;t A</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Machbarkeitsstudie, Part B (Innovationsnachweis) &emsp;
+      <strong>Deadline:</strong> 7. M&auml;rz 2026
+    </div>
+    <ul>
+      <li>Anfrage an Reverion senden (Vorlage wird bereitgestellt)</li>
+      <li>Technische Spezifikationen der rSOC-Anlage anfordern</li>
+      <li>Aktueller TRL-Level (Technologiereifegrad) mit Nachweis</li>
+      <li>Referenzanlagen / Pilotprojekte</li>
+      <li>Kostenvoranschlag f&uuml;r die geplante Konfiguration</li>
+      <li>Unterschriebenen Letter of Support anfordern</li>
+    </ul>
+  </div>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-1.4</span> &ensp; <span class="task-title">Kontakt Netzbetreiber</span></div>
+      <span class="prio prio-b">Priorit&auml;t B</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Machbarkeitsstudie, Part B &emsp;
+      <strong>Deadline:</strong> 13. M&auml;rz 2026
+    </div>
+    <ul>
+      <li>Einspeisepunkt ins Erdgasnetz identifizieren</li>
+      <li>Netzbetreiber kontaktieren und Einspeisebereitschaft anfragen</li>
+      <li>Schriftliche Best&auml;tigung oder Absichtserkl&auml;rung einholen</li>
+    </ul>
+  </div>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-1.5</span> &ensp; <span class="task-title">Leitungsplaner beauftragen</span></div>
+      <span class="prio prio-b">Priorit&auml;t B</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Machbarkeitsstudie, FIF (CAPEX), Part B &emsp;
+      <strong>Deadline:</strong> 13. M&auml;rz (Beauftragung), Ergebnis bis 27. M&auml;rz
+    </div>
+    <ul>
+      <li>Ingenieurb&uuml;ro f&uuml;r Trassenplanung 20 km Biomethan-Leitung beauftragen</li>
+      <li>Kostenvoranschlag Leitungsbau anfordern</li>
+      <li>Kostenvoranschlag Verdichterstation(en) und Einspeiseanlage</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Betreiber Phase 1 -->
+<div class="role-section betreiber" id="phase1-b">
+  <span class="role-header betreiber">Jeder Betreiber (&times;8)</span>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">B-1.1</span> &ensp; <span class="task-title">Unterschriebener Letter of Intent</span></div>
+      <span class="prio prio-a">Priorit&auml;t A</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Antragstellung (Part A + Part B), Machbarkeitsstudie &emsp;
+      <strong>Deadline:</strong> 7. M&auml;rz 2026 &emsp;
+      <strong>Vorlage:</strong> Wird per E-Mail zugesandt
+    </div>
+    <p>Inhalt des LoI:</p>
+    <ul>
+      <li>Zusage zur Lieferung von Rohbiogas an die Projektgesellschaft</li>
+      <li>Zusage zum Beitritt als Gesellschafter der Projektgesellschaft</li>
+      <li>Zusage zur Leistung des Eigenanteils an der Investition</li>
+      <li>Unterschrift des Gesch&auml;ftsf&uuml;hrers / Inhabers auf Firmenbriefpapier</li>
+    </ul>
+  </div>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">B-1.2</span> &ensp; <span class="task-title">Datenblatt Biogasanlage</span></div>
+      <span class="prio prio-a">Priorit&auml;t A</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Alle Dokumente (Machbarkeitsstudie, FIF, GHG, Part B, Business Plan) &emsp;
+      <strong>Deadline:</strong> 10. M&auml;rz 2026 &emsp;
+      <strong>Vorlage:</strong> Separates Formular &bdquo;Datenblatt Biogasanlage&ldquo;
+    </div>
+    <p>Folgende Daten werden abgefragt:</p>
+    <table class="table-compact">
+      <thead><tr><th>Bereich</th><th>Angaben</th></tr></thead>
+      <tbody>
+        <tr><td><strong>a) Betreiberinfos</strong></td><td>Unternehmensname, Rechtsform, HR-Nr., Gesch&auml;ftsf&uuml;hrer, Adresse, USt-ID, Ansprechpartner</td></tr>
+        <tr><td><strong>b) Standort</strong></td><td>Adresse der Anlage, GPS-Koordinaten, Landkreis, Flurst&uuml;ck-Nr.</td></tr>
+        <tr><td><strong>c) Technik</strong></td><td>Installierte Leistung (kW<sub>el</sub>/kW<sub>th</sub>), Biogasproduktion (Nm&sup3;/h), Methangehalt (%), Betriebsstunden/a</td></tr>
+        <tr><td><strong>d) Substratmix</strong></td><td>Art, Menge (t/a), Anteil (%), Herkunft je Substrat</td></tr>
+        <tr><td><strong>e) Bestandsanlagen</strong></td><td>Fermenter, BHKW, Gasspeicher, Nachg&auml;rer, Gasfackel (Hersteller, Typ, Baujahr, Zustand)</td></tr>
+        <tr><td><strong>f) Energie</strong></td><td>Eigenstromverbrauch, Stromeinspeisung, EEG-Verg&uuml;tung (ct/kWh), EEG-Ende, Flexpr&auml;mie</td></tr>
+        <tr><td><strong>g) Genehmigungen</strong></td><td>BImSchG (Datum, Nr.), UVP, Natura 2000, Wasserschutzgebiet</td></tr>
+        <tr><td><strong>h) Wirtschaft</strong></td><td>Jahresumsatz, Betriebskosten, Substratkosten, Wartung, Personal, Restbuchwert, Verbindlichkeiten</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!--                         PHASE 2                               -->
+<!-- ============================================================ -->
+<div class="phase-banner" id="phase2">
+  <h1>Phase 2 &mdash; Finanzplanung und Berechnungen</h1>
+  <div class="phase-dates">KW 11&ndash;12 &bull; bis 27. M&auml;rz 2026</div>
+</div>
+
+<div class="role-section berater">
+  <span class="role-header berater">Was wir (Berater) in dieser Phase tun</span>
+  <ul>
+    <li>Financial Information File (FIF) erstellen und berechnen</li>
+    <li>GHG Emission Avoidance Calculator ausf&uuml;llen</li>
+    <li>Machbarkeitsstudie fertigstellen</li>
+    <li>Business Plan erstellen (Marktanalyse, Finanzmodell)</li>
+  </ul>
+</div>
+
+<!-- PG Phase 2 -->
+<div class="role-section pg" id="phase2-pg">
+  <span class="role-header pg">Projektgesellschaft</span>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-2.1</span> &ensp; <span class="task-title">Kostenvoranschl&auml;ge sammeln und weiterleiten</span></div>
+      <span class="prio prio-a">Priorit&auml;t A</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> FIF (CAPEX), Machbarkeitsstudie, Business Plan &emsp;
+      <strong>Deadline:</strong> 20. M&auml;rz 2026
+    </div>
+    <table class="table-compact">
+      <thead><tr><th>Nr.</th><th>Angebot von</th><th>Gegenstand</th><th style="width:15mm" class="col-check">&#9744;</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Reverion GmbH</td><td>rSOC-Anlage(n) inkl. Installation</td><td class="col-check">&#9744;</td></tr>
+        <tr><td>2</td><td>Membrananbieter 1</td><td>Membranaufbereitung (8 St&uuml;ck)</td><td class="col-check">&#9744;</td></tr>
+        <tr><td>3</td><td>Membrananbieter 2</td><td>Vergleichsangebot Membran</td><td class="col-check">&#9744;</td></tr>
+        <tr><td>4</td><td>Ingenieurb&uuml;ro</td><td>Leitungsbau 20 km</td><td class="col-check">&#9744;</td></tr>
+        <tr><td>5</td><td>Ingenieurb&uuml;ro</td><td>Verdichterstation + Einspeiseanlage</td><td class="col-check">&#9744;</td></tr>
+        <tr><td>6</td><td>CO2-Spezialist</td><td>CO2-Verdichtung und -Speicherung</td><td class="col-check">&#9744;</td></tr>
+        <tr><td>7</td><td>LKW-Anbieter</td><td>CO2-Transport-LKW</td><td class="col-check">&#9744;</td></tr>
+      </tbody>
+    </table>
+    <div class="note note-warning" style="margin-top:2mm;">
+      <strong>Wichtig:</strong> Die CAPEX-Zahlen im Antrag m&uuml;ssen durch Angebote belegt sein. Ohne belastbare Kostenvoranschl&auml;ge kann das FIF nicht ausgef&uuml;llt werden.
+    </div>
+  </div>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-2.2</span> &ensp; <span class="task-title">Letter of Support Reverion</span></div>
+      <span class="prio prio-a">Priorit&auml;t A</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Part B (Innovationsnachweis &mdash; Pass/Fail-Kriterium!) &emsp;
+      <strong>Deadline:</strong> 20. M&auml;rz 2026
+    </div>
+    <ul>
+      <li>Unterschriebenes Unterst&uuml;tzungsschreiben von Reverion GmbH</li>
+      <li>Auf Reverion-Briefpapier</li>
+      <li>Inhalt: TRL-Best&auml;tigung, Technologiebeschreibung, Zusage zur Zusammenarbeit</li>
+    </ul>
+  </div>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-2.3</span> &ensp; <span class="task-title">CO2-Abnahmevertrag / Absichtserkl&auml;rung</span></div>
+      <span class="prio prio-a">Priorit&auml;t A</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Business Plan, Part B, FIF (Revenue) &emsp;
+      <strong>Deadline:</strong> 24. M&auml;rz 2026
+    </div>
+    <ul>
+      <li>Absichtserkl&auml;rung (Letter of Intent) von mindestens einem CO2-Abnehmer (Brauerei, Getr&auml;nkehersteller, CO2-H&auml;ndler)</li>
+      <li>Inhalt: Interesse an Food-Grade CO2, indikative Abnahmemenge und Preis</li>
+      <li>Auf Briefpapier des Abnehmers, unterschrieben</li>
+    </ul>
+  </div>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-2.4</span> &ensp; <span class="task-title">Finanzierungsplan</span></div>
+      <span class="prio prio-b">Priorit&auml;t B</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> FIF, Business Plan, Part B &emsp;
+      <strong>Deadline:</strong> 27. M&auml;rz 2026
+    </div>
+    <ul>
+      <li>Geplante Eigenkapitalquote und -aufteilung auf 8 Gesellschafter</li>
+      <li>Bankgespr&auml;ch(e) bzgl. Fremdfinanzierung (KfW 270, Hausbank)?</li>
+      <li>Schriftliche Auskunft der Bank &uuml;ber grunds&auml;tzliche Finanzierungsbereitschaft</li>
+      <li>Ggf. Antrag BioMeth Bayern &mdash; Status?</li>
+    </ul>
+  </div>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-2.5</span> &ensp; <span class="task-title">Best&auml;tigung Netzbetreiber</span></div>
+      <span class="prio prio-b">Priorit&auml;t B</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Machbarkeitsstudie, Part B &emsp;
+      <strong>Deadline:</strong> 24. M&auml;rz 2026
+    </div>
+    <ul>
+      <li>Schriftliche Best&auml;tigung des Netzbetreibers zur Einspeisebereitschaft</li>
+      <li>Oder zumindest formlose Best&auml;tigung per E-Mail</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Betreiber Phase 2 -->
+<div class="role-section betreiber" id="phase2-b">
+  <span class="role-header betreiber">Jeder Betreiber (&times;8)</span>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">B-2.1</span> &ensp; <span class="task-title">Erg&auml;nzende technische Daten</span></div>
+      <span class="prio prio-b">Priorit&auml;t B</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> GHG-Calculator, Machbarkeitsstudie &emsp;
+      <strong>Deadline:</strong> 17. M&auml;rz 2026 &emsp;
+      (Nur falls im Datenblatt aus Phase 1 noch nicht enthalten)
+    </div>
+    <ul>
+      <li>Aktuelle Methan-Emissionsmessungen (falls vorhanden)</li>
+      <li>Gasdichtheitspr&uuml;fung der Bestandsanlage (letztes Protokoll)</li>
+      <li>Aktuelle Gasanalyse (H2S, Siloxane, NH3, Feuchte) &mdash; falls vorhanden</li>
+      <li>Ggf. Gutachten zur Substratqualit&auml;t</li>
+    </ul>
+  </div>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">B-2.2</span> &ensp; <span class="task-title">Wirtschaftliche Zusatzdaten</span></div>
+      <span class="prio prio-b">Priorit&auml;t B</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> FIF, Business Plan &emsp;
+      <strong>Deadline:</strong> 20. M&auml;rz 2026
+    </div>
+    <ul>
+      <li>Aktuelle EEG-Verg&uuml;tungsabrechnung (letztes volles Jahr)</li>
+      <li>Bestehende Wartungsvertr&auml;ge (BHKW, Fermenter)</li>
+      <li>Versicherungskosten der Anlage</li>
+      <li>Ggf. laufende oder geplante Investitionen an der Anlage</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!--                         PHASE 3                               -->
+<!-- ============================================================ -->
+<div class="phase-banner" id="phase3">
+  <h1>Phase 3 &mdash; Antragstellung und Hauptdokumente</h1>
+  <div class="phase-dates">KW 13&ndash;14 &bull; bis 10. April 2026</div>
+</div>
+
+<div class="role-section berater">
+  <span class="role-header berater">Was wir (Berater) in dieser Phase tun</span>
+  <ul>
+    <li>Part B (Technische Beschreibung, 70 Seiten) fertigstellen</li>
+    <li>Knowledge Sharing Plan erstellen</li>
+    <li>DNSH-Bewertung (Do No Significant Harm) erstellen</li>
+    <li>Arbeitspakete, Meilensteine, Gantt-Chart finalisieren</li>
+    <li>Alle Berechnungsdokumente (FIF, GHG) finalisieren</li>
+  </ul>
+</div>
+
+<!-- PG Phase 3 -->
+<div class="role-section pg" id="phase3-pg">
+  <span class="role-header pg">Projektgesellschaft</span>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-3.1</span> &ensp; <span class="task-title">Gesellschaftsvertrag &mdash; Entwurf</span></div>
+      <span class="prio prio-a">Priorit&auml;t A</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Part B (Abschnitt Projektreife), Part A &emsp;
+      <strong>Deadline:</strong> 3. April 2026
+    </div>
+    <ul>
+      <li>Entwurf des Gesellschaftsvertrags (vom Notar/Juristen)</li>
+      <li>Muss nicht endg&uuml;ltig sein, aber Struktur und Gesellschafter m&uuml;ssen erkennbar sein</li>
+    </ul>
+  </div>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-3.2</span> &ensp; <span class="task-title">Organigramm / Management-Struktur</span></div>
+      <span class="prio prio-b">Priorit&auml;t B</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Part B, Business Plan &emsp;
+      <strong>Deadline:</strong> 3. April 2026
+    </div>
+    <ul>
+      <li>Wer f&uuml;hrt die Gesch&auml;fte?</li>
+      <li>Wer ist technischer Leiter?</li>
+      <li>Wer ist Projektmanager f&uuml;r den EU-Antrag?</li>
+      <li>Kurzlebensl&auml;ufe (max. &frac12; Seite) der Schl&uuml;sselpersonen</li>
+    </ul>
+  </div>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-3.3</span> &ensp; <span class="task-title">Genehmigungsstrategie</span></div>
+      <span class="prio prio-b">Priorit&auml;t B</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Part B (Abschnitt Projektreife), Machbarkeitsstudie &emsp;
+      <strong>Deadline:</strong> 7. April 2026
+    </div>
+    <ul>
+      <li>Welche Genehmigungen sind n&ouml;tig? (BImSchG-&Auml;nderung je Standort? Leitungsgenehmigung?)</li>
+      <li>Welche Genehmigungen liegen bereits vor?</li>
+      <li>Zeitplan f&uuml;r ausstehende Genehmigungen</li>
+      <li>Ggf. Vorgespr&auml;che mit Genehmigungsbeh&ouml;rden dokumentieren</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Betreiber Phase 3 -->
+<div class="role-section betreiber" id="phase3-b">
+  <span class="role-header betreiber">Jeder Betreiber (&times;8)</span>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">B-3.1</span> &ensp; <span class="task-title">Standortspezifische Informationen</span></div>
+      <span class="prio prio-b">Priorit&auml;t B</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Part B (Arbeitsplan), Machbarkeitsstudie &emsp;
+      <strong>Deadline:</strong> 3. April 2026
+    </div>
+    <ul>
+      <li>Verf&uuml;gbare Fl&auml;che f&uuml;r die Membrananlage am Standort (m&sup2;)</li>
+      <li>Stromanschluss am Standort (kW verf&uuml;gbar)</li>
+      <li>Wasseranschluss vorhanden? Ja/Nein</li>
+      <li>Zufahrtsm&ouml;glichkeit f&uuml;r LKW (CO2-Abholung)</li>
+      <li>Besondere Einschr&auml;nkungen am Standort (z.B. L&auml;rm, Naturschutz, Abstand)</li>
+    </ul>
+  </div>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">B-3.2</span> &ensp; <span class="task-title">Foto-Dokumentation</span></div>
+      <span class="prio prio-c">Priorit&auml;t C</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Part B, Machbarkeitsstudie (Anhang) &emsp;
+      <strong>Deadline:</strong> 7. April 2026
+    </div>
+    <ul>
+      <li>2&ndash;3 Fotos der Biogasanlage (Gesamtansicht, Fermenter, Technikraum)</li>
+      <li>1 Foto des geplanten Aufstellortes f&uuml;r die Membrananlage</li>
+      <li>Optional: Luftbild / Lageplan</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!--                         PHASE 4                               -->
+<!-- ============================================================ -->
+<div class="phase-banner" id="phase4">
+  <h1>Phase 4 &mdash; Review und Qualit&auml;tssicherung</h1>
+  <div class="phase-dates">KW 15&ndash;16 &bull; bis 18. April 2026</div>
+</div>
+
+<div class="role-section berater">
+  <span class="role-header berater">Was wir (Berater) in dieser Phase tun</span>
+  <ul>
+    <li>Konsistenzpr&uuml;fung aller Dokumente (Zahlen m&uuml;ssen &uuml;berall identisch sein)</li>
+    <li>Fachliche Pr&uuml;fung durch Technologieanbieter organisieren</li>
+    <li>Self-Check Questionnaire ausf&uuml;llen</li>
+    <li>Letzte Korrekturen und Feinschliff</li>
+  </ul>
+</div>
+
+<!-- PG Phase 4 -->
+<div class="role-section pg" id="phase4-pg">
+  <span class="role-header pg">Projektgesellschaft</span>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-4.1</span> &ensp; <span class="task-title">Pr&uuml;fung und Freigabe der Antragsdokumente</span></div>
+      <span class="prio prio-a">Priorit&auml;t A</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Einreichung &emsp;
+      <strong>Deadline:</strong> 15. April 2026
+    </div>
+    <ul>
+      <li>Durchsicht aller Antragsdokumente (Part B, Machbarkeitsstudie, Business Plan)</li>
+      <li>Besonders: Pr&uuml;fung der finanziellen Angaben auf Korrektheit</li>
+      <li>Schriftliche Freigabe zur Einreichung durch den Gesch&auml;ftsf&uuml;hrer</li>
+    </ul>
+  </div>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-4.2</span> &ensp; <span class="task-title">Fehlende unterst&uuml;tzende Dokumente</span></div>
+      <span class="prio prio-a">Priorit&auml;t A</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Einreichung &emsp;
+      <strong>Deadline:</strong> 15. April 2026
+    </div>
+    <p>Bitte pr&uuml;fen, ob ALLE folgenden Dokumente vorliegen:</p>
+    <table class="table-compact">
+      <thead><tr><th>Nr.</th><th>Dokument</th><th style="width:15mm" class="col-check">&#9744;</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Letters of Intent &mdash; alle 8 Betreiber</td><td class="col-check">&#9744;</td></tr>
+        <tr><td>2</td><td>Letter of Support &mdash; Reverion GmbH</td><td class="col-check">&#9744;</td></tr>
+        <tr><td>3</td><td>Absichtserkl&auml;rung CO2-Abnehmer</td><td class="col-check">&#9744;</td></tr>
+        <tr><td>4</td><td>Best&auml;tigung Netzbetreiber</td><td class="col-check">&#9744;</td></tr>
+        <tr><td>5</td><td>Gesellschaftsvertrag (Entwurf)</td><td class="col-check">&#9744;</td></tr>
+        <tr><td>6</td><td>PIC-Registrierung abgeschlossen</td><td class="col-check">&#9744;</td></tr>
+        <tr><td>7</td><td>Ggf. UVP-Vorpr&uuml;fung / Natura-2000-Check</td><td class="col-check">&#9744;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-4.3</span> &ensp; <span class="task-title">Bankbest&auml;tigung / Finanzierungszusage</span></div>
+      <span class="prio prio-b">Priorit&auml;t B</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Part B (Finanzielle Reife), FIF &emsp;
+      <strong>Deadline:</strong> 15. April 2026
+    </div>
+    <ul>
+      <li>Schriftliche Best&auml;tigung der Hausbank &uuml;ber grunds&auml;tzliche Finanzierungsbereitschaft</li>
+      <li>Oder: Nachweis &uuml;ber laufenden KfW-Antrag (KfW 270 / KfW 230)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Betreiber Phase 4 -->
+<div class="role-section betreiber" id="phase4-b">
+  <span class="role-header betreiber">Jeder Betreiber (&times;8)</span>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">B-4.1</span> &ensp; <span class="task-title">Letzte Pr&uuml;fung der eigenen Daten</span></div>
+      <span class="prio prio-b">Priorit&auml;t B</span>
+    </div>
+    <div class="task-meta">
+      <strong>Ben&ouml;tigt f&uuml;r:</strong> Konsistenzpr&uuml;fung &emsp;
+      <strong>Deadline:</strong> 14. April 2026
+    </div>
+    <ul>
+      <li>Wir senden Ihnen eine Zusammenfassung Ihrer Anlagendaten, wie sie im Antrag stehen</li>
+      <li>Bitte pr&uuml;fen und best&auml;tigen (oder korrigieren) Sie innerhalb von 3 Werktagen</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!--                         PHASE 5                               -->
+<!-- ============================================================ -->
+<div class="phase-banner" id="phase5">
+  <h1>Phase 5 &mdash; Finalisierung und Einreichung</h1>
+  <div class="phase-dates">KW 17 &bull; bis 23. April 2026</div>
+</div>
+
+<div class="role-section berater">
+  <span class="role-header berater">Was wir (Berater) in dieser Phase tun</span>
+  <ul>
+    <li>Finale &Uuml;berarbeitung aller Dokumente</li>
+    <li>&Uuml;bersetzung ins Englische (Part B und ggf. weitere Dokumente)</li>
+    <li>Alle PDFs und Excel-Dateien erstellen</li>
+    <li>Upload auf das EU Funding &amp; Tenders Portal</li>
+    <li>Part A (Administrative Forms) im Portal ausf&uuml;llen</li>
+    <li><strong>Einreichung bis sp&auml;testens 22. April 2026 (1 Tag Puffer!)</strong></li>
+  </ul>
+</div>
+
+<div class="role-section pg">
+  <span class="role-header pg">Projektgesellschaft</span>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-5.1</span> &ensp; <span class="task-title">Portal-Zugang</span></div>
+      <span class="prio prio-a">Priorit&auml;t A</span>
+    </div>
+    <div class="task-meta">
+      <strong>Deadline:</strong> 18. April 2026
+    </div>
+    <ul>
+      <li>Best&auml;tigen, dass LEAR-Ernennung abgeschlossen und Berater als Account Administrator eingerichtet ist (vgl. PG-1.2)</li>
+      <li>PIC-Nummer best&auml;tigen</li>
+      <li>Ggf. weitere Portal-Berechtigungen pr&uuml;fen</li>
+    </ul>
+  </div>
+
+  <div class="task-block">
+    <div class="task-header">
+      <div><span class="task-id">PG-5.2</span> &ensp; <span class="task-title">Finale Unterschrift / Freigabe</span></div>
+      <span class="prio prio-a">Priorit&auml;t A</span>
+    </div>
+    <div class="task-meta">
+      <strong>Deadline:</strong> 21. April 2026
+    </div>
+    <ul>
+      <li>Finale Freigabe der eingereichten Unterlagen</li>
+      <li>Ggf. elektronische Unterschrift auf dem Portal</li>
+    </ul>
+  </div>
+</div>
+
+<div class="role-section betreiber">
+  <span class="role-header betreiber">Betreiber</span>
+  <p style="color:var(--text-light); font-style:italic; margin-top:2mm;">
+    Von den Betreibern werden in Phase 5 keine weiteren Zulieferungen ben&ouml;tigt.
+  </p>
+</div>
+
+
+<!-- ============================================================ -->
+<!--              ZUSAMMENFASSUNG NACH ZIEL-DOKUMENT               -->
+<!-- ============================================================ -->
+<div class="phase-banner" id="dokumente" style="background:var(--accent);">
+  <h1>Zusammenfassung: Daten nach Ziel-Dokument</h1>
+  <div class="phase-dates"></div>
+</div>
+
+<h3>Hauptantrag (Part B &mdash; Technische Beschreibung)</h3>
+<table>
+  <thead><tr><th>Daten</th><th>Quelle</th><th>Phase</th></tr></thead>
+  <tbody>
+    <tr><td>PIC-Nummer der Projektgesellschaft</td><td>Berater</td><td>1</td></tr>
+    <tr><td>Letters of Intent aller 8 Betreiber</td><td>Betreiber</td><td>1</td></tr>
+    <tr><td>Letter of Support Reverion (TRL-Nachweis!)</td><td>PG / Reverion</td><td>2</td></tr>
+    <tr><td>Technische Spezifikationen Reverion rSOC</td><td>PG / Reverion</td><td>1&ndash;2</td></tr>
+    <tr><td>Technische Spezifikationen Membrananlage</td><td>PG / Anbieter</td><td>1&ndash;2</td></tr>
+    <tr><td>Anlagendaten aller 8 Betreiber</td><td>Betreiber</td><td>1</td></tr>
+    <tr><td>Gesellschaftsvertrag (Entwurf)</td><td>PG</td><td>3</td></tr>
+    <tr><td>Organigramm und Schl&uuml;sselpersonen</td><td>PG</td><td>3</td></tr>
+    <tr><td>Genehmigungsstrategie</td><td>PG</td><td>3</td></tr>
+    <tr><td>Best&auml;tigung Netzbetreiber</td><td>PG</td><td>2</td></tr>
+    <tr><td>Standortinformationen (Platz, Strom, Zufahrt)</td><td>Betreiber</td><td>3</td></tr>
+    <tr><td>Fotos Anlagen</td><td>Betreiber</td><td>3</td></tr>
+  </tbody>
+</table>
+
+<h3>Financial Information File (FIF)</h3>
+<table>
+  <thead><tr><th>Daten</th><th>Quelle</th><th>Phase</th></tr></thead>
+  <tbody>
+    <tr><td>Kostenvoranschlag Reverion rSOC</td><td>PG / Reverion</td><td>2</td></tr>
+    <tr><td>Kostenvoranschlag Membrananlage (8&times;)</td><td>PG / Anbieter</td><td>2</td></tr>
+    <tr><td>Kostenvoranschlag Leitungsbau</td><td>PG / Ingenieurb&uuml;ro</td><td>2</td></tr>
+    <tr><td>Kostenvoranschlag CO2-Logistik</td><td>PG / Anbieter</td><td>2</td></tr>
+    <tr><td>Wirtschaftliche Daten der 8 Betreiber</td><td>Betreiber</td><td>1</td></tr>
+    <tr><td>EEG-Verg&uuml;tungsabrechnungen</td><td>Betreiber</td><td>2</td></tr>
+    <tr><td>CO2-Abnahmepreis (aus LOI mit Abnehmer)</td><td>PG</td><td>2</td></tr>
+    <tr><td>Eigenkapitalaufteilung</td><td>PG</td><td>2</td></tr>
+    <tr><td>Bankbest&auml;tigung Fremdfinanzierung</td><td>PG</td><td>4</td></tr>
+  </tbody>
+</table>
+
+<h3>Machbarkeitsstudie</h3>
+<table>
+  <thead><tr><th>Daten</th><th>Quelle</th><th>Phase</th></tr></thead>
+  <tbody>
+    <tr><td>Technische Anlagendaten aller 8 Betreiber</td><td>Betreiber</td><td>1</td></tr>
+    <tr><td>Substratmix und -mengen</td><td>Betreiber</td><td>1</td></tr>
+    <tr><td>Genehmigungsstatus (BImSchG)</td><td>Betreiber</td><td>1</td></tr>
+    <tr><td>Standortdaten (GPS, Fl&auml;che, Infrastruktur)</td><td>Betreiber</td><td>1 + 3</td></tr>
+    <tr><td>Technische Daten Reverion</td><td>PG / Reverion</td><td>1&ndash;2</td></tr>
+    <tr><td>Technische Daten Membrananlage</td><td>PG / Anbieter</td><td>1&ndash;2</td></tr>
+    <tr><td>Trassenplanung Leitung</td><td>PG / Ingenieurb&uuml;ro</td><td>2</td></tr>
+    <tr><td>Best&auml;tigung Netzbetreiber</td><td>PG</td><td>2</td></tr>
+    <tr><td>Natura-2000 / Wasserschutzgebiet-Info</td><td>Betreiber</td><td>1</td></tr>
+    <tr><td>Gasanalysen (H2S, Siloxane, Feuchte)</td><td>Betreiber</td><td>2</td></tr>
+  </tbody>
+</table>
+
+<h3>Business Plan</h3>
+<table>
+  <thead><tr><th>Daten</th><th>Quelle</th><th>Phase</th></tr></thead>
+  <tbody>
+    <tr><td>Wirtschaftliche Daten der 8 Betreiber</td><td>Betreiber</td><td>1</td></tr>
+    <tr><td>Kostenvoranschl&auml;ge (alle)</td><td>PG / Anbieter</td><td>2</td></tr>
+    <tr><td>CO2-Abnahmevertrag / LOI</td><td>PG</td><td>2</td></tr>
+    <tr><td>Finanzierungsplan (Eigen-/Fremdkapital)</td><td>PG</td><td>2</td></tr>
+    <tr><td>Bankbest&auml;tigung</td><td>PG</td><td>4</td></tr>
+    <tr><td>Organigramm und Management</td><td>PG</td><td>3</td></tr>
+  </tbody>
+</table>
+
+<h3>GHG Emission Avoidance Calculator</h3>
+<table>
+  <thead><tr><th>Daten</th><th>Quelle</th><th>Phase</th></tr></thead>
+  <tbody>
+    <tr><td>Biogasproduktion (Nm&sup3;/h) je Anlage</td><td>Betreiber</td><td>1</td></tr>
+    <tr><td>Methangehalt (%) je Anlage</td><td>Betreiber</td><td>1</td></tr>
+    <tr><td>Substratmix je Anlage</td><td>Betreiber</td><td>1</td></tr>
+    <tr><td>Betriebsstunden pro Jahr</td><td>Betreiber</td><td>1</td></tr>
+    <tr><td>Eigenstromverbrauch</td><td>Betreiber</td><td>1</td></tr>
+    <tr><td>Methan-Emissionsmessungen (falls vorhanden)</td><td>Betreiber</td><td>2</td></tr>
+    <tr><td>Reverion CO2-Abscheidegrad und Reinheit</td><td>PG / Reverion</td><td>1&ndash;2</td></tr>
+  </tbody>
+</table>
+
+
+<!-- ============================================================ -->
+<!--                    DEADLINE-UEBERSICHT                        -->
+<!-- ============================================================ -->
+<div class="phase-banner" id="deadlines" style="background:#1a5c3a;">
+  <h1>Alle Deadlines auf einen Blick</h1>
+  <div class="phase-dates"></div>
+</div>
+
+<table>
+  <thead>
+    <tr><th>Deadline</th><th>Was</th><th>Wer</th></tr>
+  </thead>
+  <tbody>
+    <tr style="background:#fadbd8;"><td><strong>7. M&auml;rz</strong></td><td>Letter of Intent unterschrieben</td><td>Betreiber (&times;8)</td></tr>
+    <tr style="background:#fadbd8;"><td><strong>7. M&auml;rz</strong></td><td>Anfrage an Reverion gesendet</td><td>PG</td></tr>
+    <tr style="background:#fadbd8;"><td><strong>7. M&auml;rz</strong></td><td>Rechtsform festgelegt + Notar beauftragt</td><td>PG</td></tr>
+    <tr style="background:#fadbd8;"><td><strong>10. M&auml;rz</strong></td><td>Datenblatt Biogasanlage ausgef&uuml;llt</td><td>Betreiber (&times;8)</td></tr>
+    <tr><td><strong>13. M&auml;rz</strong></td><td>PIC-Registrierung gestartet</td><td>Berater</td></tr>
+    <tr><td><strong>13. M&auml;rz</strong></td><td>LEAR-Ernennung + Berater als Account Administrator</td><td>PG</td></tr>
+    <tr><td><strong>13. M&auml;rz</strong></td><td>Netzbetreiber kontaktiert</td><td>PG</td></tr>
+    <tr><td><strong>13. M&auml;rz</strong></td><td>Leitungsplaner beauftragt</td><td>PG</td></tr>
+    <tr><td><strong>17. M&auml;rz</strong></td><td>Erg&auml;nzende technische Daten (Gasanalysen etc.)</td><td>Betreiber (&times;8)</td></tr>
+    <tr style="background:#fadbd8;"><td><strong>20. M&auml;rz</strong></td><td>Alle Kostenvoranschl&auml;ge vorliegend</td><td>PG</td></tr>
+    <tr style="background:#fadbd8;"><td><strong>20. M&auml;rz</strong></td><td>Letter of Support Reverion erhalten</td><td>PG</td></tr>
+    <tr><td><strong>20. M&auml;rz</strong></td><td>Wirtschaftliche Zusatzdaten</td><td>Betreiber (&times;8)</td></tr>
+    <tr><td><strong>24. M&auml;rz</strong></td><td>CO2-Abnahme LOI (Brauerei etc.)</td><td>PG</td></tr>
+    <tr><td><strong>24. M&auml;rz</strong></td><td>Best&auml;tigung Netzbetreiber</td><td>PG</td></tr>
+    <tr><td><strong>27. M&auml;rz</strong></td><td>Finanzierungsplan</td><td>PG</td></tr>
+    <tr><td><strong>3. April</strong></td><td>Gesellschaftsvertrag (Entwurf)</td><td>PG</td></tr>
+    <tr><td><strong>3. April</strong></td><td>Organigramm + Kurzlebensl&auml;ufe</td><td>PG</td></tr>
+    <tr><td><strong>3. April</strong></td><td>Standortspezifische Infos (Platz, Strom)</td><td>Betreiber (&times;8)</td></tr>
+    <tr><td><strong>7. April</strong></td><td>Genehmigungsstrategie</td><td>PG</td></tr>
+    <tr><td><strong>7. April</strong></td><td>Fotos Anlagen</td><td>Betreiber (&times;8)</td></tr>
+    <tr><td><strong>14. April</strong></td><td>Datenpr&uuml;fung und -best&auml;tigung</td><td>Betreiber (&times;8)</td></tr>
+    <tr><td><strong>15. April</strong></td><td>Freigabe Antragsdokumente</td><td>PG</td></tr>
+    <tr><td><strong>15. April</strong></td><td>Alle unterst&uuml;tzenden Dokumente vollst&auml;ndig</td><td>PG</td></tr>
+    <tr><td><strong>18. April</strong></td><td>Portal-Zugang bereitstellen</td><td>PG</td></tr>
+    <tr><td><strong>21. April</strong></td><td>Finale Unterschrift / Freigabe</td><td>PG</td></tr>
+    <tr style="background:#fadbd8; font-weight:700;"><td><strong>22. April</strong></td><td>EINREICHUNG (1 Tag Puffer)</td><td>Berater</td></tr>
+    <tr style="background:#c0392b; color:#fff; font-weight:700;"><td><strong>23. April</strong></td><td>DEADLINE EU Innovation Fund</td><td>&mdash;</td></tr>
+  </tbody>
+</table>
+
+
+<!-- ============================================================ -->
+<!--                     KRITISCHER PFAD                           -->
+<!-- ============================================================ -->
+<div id="kritisch"></div>
+<div class="note note-danger" style="margin-top:8mm;">
+  <strong>KRITISCHER PFAD &mdash; Diese drei Punkte k&ouml;nnen den Antrag gef&auml;hrden:</strong>
+  <ol style="margin-top:2mm;">
+    <li style="margin-bottom:2mm;">
+      <strong>Gesellschaftsgr&uuml;ndung + PIC-Registrierung + LEAR-Ernennung</strong><br>
+      Ohne PIC keine Einreichung. PIC-Registrierung wird vom Berater durchgef&uuml;hrt,
+      aber der Gesch&auml;ftsf&uuml;hrer muss anschlie&szlig;end die LEAR-Ernennung abschlie&szlig;en.
+      Beides zusammen dauert bis zu 2&ndash;3 Wochen.
+      &rarr; <em>Start: SOFORT</em>
+    </li>
+    <li style="margin-bottom:2mm;">
+      <strong>Letter of Support Reverion mit TRL-Nachweis</strong><br>
+      Der Innovationsgrad ist ein Pass/Fail-Kriterium. Ohne belastbaren TRL-Nachweis
+      f&auml;llt der Antrag bei der ersten Bewertungsstufe durch.
+      &rarr; <em>Reverion SOFORT kontaktieren</em>
+    </li>
+    <li>
+      <strong>Kostenvoranschl&auml;ge</strong><br>
+      Ohne belastbare Zahlen k&ouml;nnen weder das Financial Information File (FIF)
+      noch die Machbarkeitsstudie fertiggestellt werden. Alles andere baut darauf auf.
+      &rarr; <em>Angebote bis sp&auml;testens 20. M&auml;rz einholen</em>
+    </li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+<!--                     GLOSSAR                                  -->
+<!-- ============================================================ -->
+<div class="phase-banner" id="glossar" style="background:var(--accent);">
+  <h1>Glossar / Abk&uuml;rzungsverzeichnis</h1>
+  <div class="phase-dates"></div>
+</div>
+
+<table>
+  <thead>
+    <tr><th style="width:25%;">Abk&uuml;rzung</th><th>Erkl&auml;rung</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>BHKW</strong></td><td>Blockheizkraftwerk &mdash; Anlage zur gleichzeitigen Erzeugung von Strom und W&auml;rme aus Biogas</td></tr>
+    <tr><td><strong>BImSchG</strong></td><td>Bundes-Immissionsschutzgesetz &mdash; Rechtsgrundlage f&uuml;r die Genehmigung von Biogasanlagen</td></tr>
+    <tr><td><strong>CAPEX</strong></td><td>Capital Expenditure &mdash; Investitionskosten (einmalige Anschaffungskosten)</td></tr>
+    <tr><td><strong>CINEA</strong></td><td>European Climate, Infrastructure and Environment Executive Agency &mdash; EU-Agentur, die den Innovation Fund verwaltet</td></tr>
+    <tr><td><strong>DNSH</strong></td><td>Do No Significant Harm &mdash; EU-Taxonomie-Prinzip: das Projekt darf keinem der 6 Umweltziele erheblich schaden</td></tr>
+    <tr><td><strong>EEG</strong></td><td>Erneuerbare-Energien-Gesetz &mdash; deutsches Gesetz zur F&ouml;rderung erneuerbarer Energien (inkl. Biogasverg&uuml;tung)</td></tr>
+    <tr><td><strong>FIF</strong></td><td>Financial Information File &mdash; offizielle Excel-Vorlage der EU zur Darstellung der Finanzplanung (CAPEX, OPEX, Einnahmen, relevante Kosten)</td></tr>
+    <tr><td><strong>GHG</strong></td><td>Greenhouse Gas &mdash; Treibhausgas (CO2, CH4 etc.); im Kontext: GHG Emission Avoidance Calculator</td></tr>
+    <tr><td><strong>GPS</strong></td><td>Global Positioning System &mdash; Koordinatensystem zur Standortbestimmung (Breitengrad/L&auml;ngengrad)</td></tr>
+    <tr><td><strong>IF25 NZT</strong></td><td>Innovation Fund 2025 &mdash; Net-Zero Technologies; F&ouml;rderprogramm der EU f&uuml;r klimaneutrale Technologien</td></tr>
+    <tr><td><strong>IRR</strong></td><td>Internal Rate of Return &mdash; interner Zinsfu&szlig;; Renditekennzahl f&uuml;r Investitionsprojekte</td></tr>
+    <tr><td><strong>KfW</strong></td><td>Kreditanstalt f&uuml;r Wiederaufbau &mdash; deutsche F&ouml;rderbank (Programme 230, 270)</td></tr>
+    <tr><td><strong>LEAR</strong></td><td>Legal Entity Appointed Representative &mdash; von der EU validierte Kontaktperson der Organisation im Funding &amp; Tenders Portal</td></tr>
+    <tr><td><strong>LoI</strong></td><td>Letter of Intent &mdash; Absichtserkl&auml;rung (hier: Zusage der Betreiber zu Biogaslieferung und Gesellschaftsbeitritt)</td></tr>
+    <tr><td><strong>LoS</strong></td><td>Letter of Support &mdash; Unterst&uuml;tzungsschreiben (hier: von Reverion GmbH als Technologiebest&auml;tigung)</td></tr>
+    <tr><td><strong>Nm&sup3;/h</strong></td><td>Normkubikmeter pro Stunde &mdash; Ma&szlig;einheit f&uuml;r Gasvolumenstrom unter Normbedingungen (0&nbsp;&deg;C, 1,013&nbsp;bar)</td></tr>
+    <tr><td><strong>NPV</strong></td><td>Net Present Value &mdash; Kapitalwert; Barwert aller zuk&uuml;nftigen Zahlungsstr&ouml;me eines Projekts</td></tr>
+    <tr><td><strong>OPEX</strong></td><td>Operational Expenditure &mdash; laufende Betriebskosten (Wartung, Personal, Energie, Versicherung)</td></tr>
+    <tr><td><strong>Part A</strong></td><td>Administrative Forms &mdash; administrativer Teil des EU-Antrags (Online-Formular im Portal)</td></tr>
+    <tr><td><strong>Part B</strong></td><td>Technical Description &mdash; technischer Hauptantrag (max. 70 Seiten, PDF-Upload)</td></tr>
+    <tr><td><strong>PG</strong></td><td>Projektgesellschaft &mdash; das neu zu gr&uuml;ndende gemeinsame Unternehmen der 8 Betreiber</td></tr>
+    <tr><td><strong>PIC</strong></td><td>Participant Identification Code &mdash; 9-stellige Kennnummer f&uuml;r Organisationen im EU Funding &amp; Tenders Portal</td></tr>
+    <tr><td><strong>rSOC</strong></td><td>Reversible Solid Oxide Cell &mdash; Reverion-Technologie zur hocheffizienten CO2-Abscheidung aus Biogas</td></tr>
+    <tr><td><strong>RTO</strong></td><td>Regenerative Thermal Oxidizer &mdash; konventionelle Abgasreinigung (Referenztechnologie im Vergleich zu Reverion)</td></tr>
+    <tr><td><strong>TRL</strong></td><td>Technology Readiness Level &mdash; Technologiereifegrad (Skala 1&ndash;9, ab TRL 7 gilt eine Technologie als demonstriert)</td></tr>
+    <tr><td><strong>USt-ID</strong></td><td>Umsatzsteuer-Identifikationsnummer &mdash; EU-weit g&uuml;ltige Steuernummer f&uuml;r Unternehmen</td></tr>
+    <tr><td><strong>UVP</strong></td><td>Umweltvertr&auml;glichkeitspr&uuml;fung &mdash; gesetzlich vorgeschriebene Pr&uuml;fung der Umweltauswirkungen</td></tr>
+  </tbody>
+</table>
+
+
+<!-- ==================== FOOTER ==================== -->
+<div class="footer">
+  Bei Fragen wenden Sie sich bitte an <strong>Alexander Schwaigkofler</strong>, Energieberatung Schwaigkofler GmbH &bull; +49 821 567 316 77 &bull; info@schwaigkofler.org
+</div>
+
+</body>
+</html>

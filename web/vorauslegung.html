@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technische Vorauslegung &mdash; Dimensionierung aller Komponenten</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --accent: #2980b9;
+    --success: #27ae60;
+    --warning: #e67e22;
+    --danger: #c0392b;
+    --light-bg: #f8f9fa;
+    --border: #dde1e5;
+    --text: #2c3e50;
+    --text-light: #5d6d7e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: var(--text);
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 12mm 18mm;
+    background: #fff;
+  }
+
+  /* Deckblatt */
+  .cover {
+    text-align: center;
+    padding: 30mm 0 20mm 0;
+    border-bottom: 3px solid var(--primary);
+    margin-bottom: 6mm;
+  }
+  .cover-label {
+    font-size: 10pt;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 5mm;
+  }
+  .cover h1 {
+    font-size: 18pt;
+    color: var(--primary);
+    margin-bottom: 3mm;
+    line-height: 1.25;
+  }
+  .cover h2 {
+    font-size: 11pt;
+    color: var(--text-light);
+    font-weight: 400;
+    margin-bottom: 10mm;
+  }
+  .cover-meta {
+    font-size: 9pt;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+  .cover-meta strong { color: var(--text); }
+
+  /* Abschnitte */
+  h2 {
+    font-size: 12pt;
+    color: #fff;
+    background: var(--primary);
+    padding: 3mm 4mm;
+    margin: 6mm 0 4mm 0;
+    page-break-after: avoid;
+  }
+  h2 .sec-nr {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 0 3mm;
+    margin-right: 2mm;
+    border-radius: 1mm;
+    font-size: 11pt;
+  }
+  h3 {
+    font-size: 10.5pt;
+    color: var(--primary);
+    margin: 4mm 0 2mm 0;
+    padding-bottom: 1mm;
+    border-bottom: 1px solid var(--border);
+  }
+
+  p { margin-bottom: 3mm; text-align: justify; hyphens: auto; }
+
+  /* Tabellen */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 3mm 0 4mm 0;
+    font-size: 9.5pt;
+  }
+  th {
+    background: var(--primary);
+    color: #fff;
+    padding: 2mm 3mm;
+    text-align: left;
+    font-weight: 600;
+    font-size: 9pt;
+  }
+  td {
+    padding: 1.5mm 3mm;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:nth-child(even) { background: var(--light-bg); }
+
+  /* Berechnungstabellen */
+  .calc-table td:nth-child(1) { width: 32%; font-weight: 600; color: var(--primary); }
+  .calc-table td:nth-child(2) { width: 30%; font-family: 'Consolas', 'Courier New', monospace; font-size: 9pt; }
+  .calc-table td:nth-child(3) { width: 18%; text-align: right; font-weight: 600; }
+  .calc-table td:nth-child(4) { width: 10%; color: var(--text-light); font-size: 8.5pt; }
+  .calc-table td:nth-child(5) { width: 10%; color: var(--text-light); font-size: 8pt; }
+
+  /* Platzhalter */
+  .ph {
+    display: inline-block;
+    background: #fff3cd;
+    border: 1px dashed var(--warning);
+    padding: 0 2mm;
+    color: var(--warning);
+    font-weight: 700;
+    font-size: 9pt;
+    border-radius: 1mm;
+  }
+
+  /* Formelbox */
+  .formula {
+    background: #eaf2f8;
+    border-left: 4px solid var(--accent);
+    padding: 2.5mm 4mm;
+    margin: 3mm 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.6;
+  }
+
+  /* Ergebnis-Highlight */
+  .result {
+    background: #e8f8f0;
+    border-left: 4px solid var(--success);
+    padding: 2.5mm 4mm;
+    margin: 3mm 0;
+    font-size: 9.5pt;
+  }
+  .result strong { color: var(--success); }
+
+  /* Hinweis-Box */
+  .note {
+    padding: 2.5mm 4mm;
+    border-radius: 2mm;
+    margin: 3mm 0;
+    font-size: 9pt;
+  }
+  .note-info { background: #eaf2f8; border-left: 4px solid var(--accent); }
+  .note-warn { background: #fff3cd; border-left: 4px solid var(--warning); }
+
+  /* Prozessfluss-Diagramm */
+  .process-flow {
+    background: var(--light-bg);
+    border: 1px solid var(--border);
+    border-radius: 2mm;
+    padding: 4mm;
+    margin: 4mm 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  /* Zusammenfassungstabelle */
+  .summary-table td:first-child { width: 40%; font-weight: 600; color: var(--primary); }
+  .summary-table td:nth-child(2) { width: 25%; text-align: right; font-weight: 700; color: var(--text); font-size: 10pt; }
+  .summary-table td:nth-child(3) { width: 15%; }
+  .summary-table td:nth-child(4) { width: 20%; color: var(--text-light); font-size: 8.5pt; }
+  .summary-table tr.group-header td {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 9.5pt;
+    padding: 2mm 3mm;
+  }
+
+  /* Anlagen-Eingabetabelle */
+  .input-table td:first-child { width: 5%; text-align: center; font-weight: 700; color: var(--accent); }
+  .input-table td { text-align: center; }
+  .input-table td:nth-child(2) { text-align: left; }
+
+  /* Seitenumbruch */
+  .page-break { page-break-before: always; }
+
+  /* Footer */
+  .footer {
+    margin-top: 8mm;
+    padding-top: 3mm;
+    border-top: 1px solid var(--border);
+    font-size: 8pt;
+    color: var(--text-light);
+    text-align: center;
+  }
+
+  /* Inhaltsverzeichnis */
+  .toc {
+    margin: 4mm 0;
+    padding: 3mm 4mm;
+    background: var(--light-bg);
+    border-radius: 2mm;
+  }
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1mm 0;
+    border-bottom: 1px dotted var(--border);
+    font-size: 9.5pt;
+  }
+  .toc-item:last-child { border-bottom: none; }
+  .toc-item span:first-child { font-weight: 600; color: var(--primary); }
+
+  ul, ol { margin: 2mm 0 3mm 5mm; padding-left: 4mm; }
+  li { margin-bottom: 1mm; }
+
+  @media print {
+    body { padding: 10mm 15mm; }
+    .page-break { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+<script>
+  if (sessionStorage.getItem('if25auth') !== '572c59856823eb9418594e39bdeca72b8008c0490a4e26ce2f3689ccd603c7c5') {
+    window.location.href = 'index.html';
+  }
+</script>
+
+<!-- ==================== DECKBLATT ==================== -->
+<div class="cover">
+  <div class="cover-label">EU Innovation Fund IF25 &mdash; Net-Zero Technologies</div>
+  <h1>Technische Vorauslegung</h1>
+  <h2>Dimensionierung aller Komponenten &mdash; Membrananlage, Reverion rSOC, Pipeline, CO2-Logistik</h2>
+  <div class="cover-meta">
+    <strong>Projekt:</strong> Biomethan-Konsortium Bayern &mdash; 8 Biogasanlagen, 1 zentraler Aufbereitungsstandort<br>
+    <strong>Erstellt von:</strong> Energieberatung Schwaigkofler GmbH<br>
+    <strong>Datum:</strong> 2. M&auml;rz 2026<br>
+    <strong>Status:</strong> Vorl&auml;ufig &mdash; Platzhalter durch reale Anlagendaten zu ersetzen
+  </div>
+</div>
+
+<div class="note note-warn">
+  <strong>Hinweis:</strong> Dieses Dokument enth&auml;lt <span class="ph">PLATZHALTER</span>-Werte, die durch
+  reale Anlagendaten ersetzt werden m&uuml;ssen. Die Berechnungsformeln und Zusammenh&auml;nge sind vollst&auml;ndig
+  dargestellt &mdash; nach Einsetzen der echten Daten ergeben sich die Dimensionierungsergebnisse automatisch.
+  <strong>Beispielwerte</strong> (kursiv) dienen nur zur Illustration der Berechnungslogik.
+</div>
+
+<!-- Inhaltsverzeichnis -->
+<div class="toc">
+  <div class="toc-item"><span>1 &ensp; Auslegungsgrundlagen &mdash; &Uuml;bersicht der 8 Anlagen</span></div>
+  <div class="toc-item"><span>2 &ensp; Membrananlage &mdash; Dimensionierung</span></div>
+  <div class="toc-item"><span>3 &ensp; Reverion rSOC &mdash; Dimensionierung</span></div>
+  <div class="toc-item"><span>4 &ensp; Pipeline &mdash; Dimensionierung (20 km)</span></div>
+  <div class="toc-item"><span>5 &ensp; CO2-Logistik &mdash; Mengenger&uuml;st</span></div>
+  <div class="toc-item"><span>6 &ensp; Energiebilanz &mdash; Gesamtsystem</span></div>
+  <div class="toc-item"><span>7 &ensp; Zusammenfassung der Dimensionierung</span></div>
+</div>
+
+
+<!-- ==================== PROZESSFLUSS ==================== -->
+<h3>Schematischer Prozessfluss &mdash; Gesamtsystem</h3>
+
+<div class="process-flow">
+  8 Biogasanlagen                      Zentraler Aufbereitungsstandort
+  ┌──────────────┐
+  │  Anlage 1    │───┐
+  │  [X] Nm&sup3;/h    │   │
+  └──────────────┘   │
+  ┌──────────────┐   │    ~20 km Rohbiogas-         ┌─────────────────────────────────────────────────────┐
+  │  Anlage 2    │───┤    Sammelleitung              │                                                     │
+  │  [X] Nm&sup3;/h    │   │    ══════════════&gt;            │   ┌─────────────┐    Permeat    ┌──────────────┐    │
+  └──────────────┘   │    DN 200-300                 │   │  MEMBRAN-   │──────────────&gt;│  REVERION    │    │
+       ...           ├────(4-8 bar)──────────────────┤──&gt;│  ANLAGE     │    (85-95%    │  rSOC        │    │
+  ┌──────────────┐   │                               │   │  (mehrstuf.)│     CO2)      │              │    │
+  │  Anlage 7    │───┤                               │   └──────┬──────┘              └──────┬───────┘    │
+  │  [X] Nm&sup3;/h    │   │                               │          │ Retentat                  │            │
+  └──────────────┘   │                               │          │ (&gt;97% CH4)                │            │
+  ┌──────────────┐   │                               │          ▼                           ▼            │
+  │  Anlage 8    │───┘                               │   ┌─────────────┐          ┌──────────────┐       │
+  │  [X] Nm&sup3;/h    │                                   │   │ Erdgasnetz- │          │ CO2-Tank     │       │
+  └──────────────┘                                   │   │ Einspeisung │          │ (Food-Grade) │       │
+                                                     │   │ (DVGW G260) │          │  + LKW       │       │
+                                                     │   └─────────────┘          └──────────────┘       │
+                                                     │                                                     │
+                                                     └─────────────────────────────────────────────────────┘
+  Outputs:    Biomethan ──&gt; Erdgasnetz          CO2 (Food-Grade) ──&gt; Brauereien         Strom ──&gt; Eigenbedarf/Netz
+</div>
+
+
+<!-- ============================================================ -->
+<!--              1. AUSLEGUNGSGRUNDLAGEN                          -->
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<h2><span class="sec-nr">1</span> Auslegungsgrundlagen &mdash; &Uuml;bersicht der 8 Anlagen</h2>
+
+<p>
+  Die Dimensionierung aller nachgelagerten Komponenten h&auml;ngt von den <strong>Rohbiogas-Volumenstr&ouml;men</strong>
+  der 8 Biogasanlagen ab. F&uuml;r jede Anlage sind drei Eingangsgr&ouml;&szlig;en erforderlich:
+</p>
+
+<table class="input-table">
+  <thead>
+    <tr>
+      <th>Nr.</th>
+      <th>Betreiber / Standort</th>
+      <th>Rohbiogas<br>(Nm&sup3;/h)</th>
+      <th>CH4-Gehalt<br>(%)</th>
+      <th>Betriebs&shy;stunden<br>(h/a)</th>
+      <th>Rohbiogas<br>(Nm&sup3;/a)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><span class="ph">Betreiber 1, Standort</span></td>
+      <td><span class="ph">250</span></td>
+      <td><span class="ph">53</span></td>
+      <td><span class="ph">8.200</span></td>
+      <td><em>2.050.000</em></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><span class="ph">Betreiber 2, Standort</span></td>
+      <td><span class="ph">300</span></td>
+      <td><span class="ph">55</span></td>
+      <td><span class="ph">8.200</span></td>
+      <td><em>2.460.000</em></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><span class="ph">Betreiber 3, Standort</span></td>
+      <td><span class="ph">200</span></td>
+      <td><span class="ph">54</span></td>
+      <td><span class="ph">8.000</span></td>
+      <td><em>1.600.000</em></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><span class="ph">Betreiber 4, Standort</span></td>
+      <td><span class="ph">350</span></td>
+      <td><span class="ph">52</span></td>
+      <td><span class="ph">8.200</span></td>
+      <td><em>2.870.000</em></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><span class="ph">Betreiber 5, Standort</span></td>
+      <td><span class="ph">280</span></td>
+      <td><span class="ph">55</span></td>
+      <td><span class="ph">8.100</span></td>
+      <td><em>2.268.000</em></td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><span class="ph">Betreiber 6, Standort</span></td>
+      <td><span class="ph">220</span></td>
+      <td><span class="ph">53</span></td>
+      <td><span class="ph">8.200</span></td>
+      <td><em>1.804.000</em></td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><span class="ph">Betreiber 7, Standort</span></td>
+      <td><span class="ph">270</span></td>
+      <td><span class="ph">54</span></td>
+      <td><span class="ph">8.000</span></td>
+      <td><em>2.160.000</em></td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td><span class="ph">Betreiber 8, Standort</span></td>
+      <td><span class="ph">330</span></td>
+      <td><span class="ph">55</span></td>
+      <td><span class="ph">8.200</span></td>
+      <td><em>2.706.000</em></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr style="background:var(--primary); color:#fff; font-weight:700;">
+      <td colspan="2" style="color:#fff;">SUMME / MITTELWERT</td>
+      <td style="color:#fff;">2.200</td>
+      <td style="color:#fff;">53,9</td>
+      <td style="color:#fff;">8.138</td>
+      <td style="color:#fff;">17.918.000</td>
+    </tr>
+  </tfoot>
+</table>
+
+<div class="formula">
+  Gesamtvolumenstrom&nbsp;V&#775;<sub>Rohbiogas</sub> = &Sigma; V&#775;<sub>i</sub> = 250 + 300 + 200 + 350 + 280 + 220 + 270 + 330 = <strong>2.200 Nm&sup3;/h</strong>
+  <br>
+  Mittlerer CH4-Gehalt&nbsp;x&#772;<sub>CH4</sub> = &Sigma;(V&#775;<sub>i</sub> &times; x<sub>CH4,i</sub>) / V&#775;<sub>ges</sub> = <strong>53,9 %</strong>
+  <br>
+  Jahresvolumen&nbsp;V<sub>Rohbiogas,a</sub> = V&#775;<sub>ges</sub> &times; h&#772;<sub>Betrieb</sub> = 2.200 &times; 8.138 = <strong>17.918.000 Nm&sup3;/a</strong>
+</div>
+
+<div class="note note-info">
+  <strong>Typische Biogasanlagen-Gr&ouml;&szlig;en in Bayern:</strong> 150&ndash;500 Nm&sup3;/h Rohbiogas (entspricht ca. 250&ndash;1.000 kW<sub>el</sub> BHKW).
+  Die Beispielwerte liegen im realistischen Bereich. Die Summe von 2.200 Nm&sup3;/h ist f&uuml;r ein Konsortium von 8 Anlagen plausibel.
+</div>
+
+
+<!-- ============================================================ -->
+<!--              2. MEMBRANANLAGE                                  -->
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<h2><span class="sec-nr">2</span> Membrananlage &mdash; Dimensionierung</h2>
+
+<h3>2.1 &ensp; Auslegungsparameter</h3>
+
+<table>
+  <tr><th style="width:45%;">Parameter</th><th style="width:25%;">Wert</th><th style="width:15%;">Einheit</th><th style="width:15%;">Quelle</th></tr>
+  <tr><td>Rohbiogas-Volumenstrom (Eingang)</td><td><strong>2.200</strong></td><td>Nm&sup3;/h</td><td>Abschnitt 1</td></tr>
+  <tr><td>CH4-Gehalt Rohbiogas (Mittel)</td><td>53,9</td><td>%</td><td>Abschnitt 1</td></tr>
+  <tr><td>CO2-Gehalt Rohbiogas</td><td>~45</td><td>%</td><td>Bilanz (Rest: N2, H2S, H2O)</td></tr>
+  <tr><td>Membrankonfiguration</td><td>3-stufig</td><td>&mdash;</td><td>Stand der Technik</td></tr>
+  <tr><td>Biomethan-Reinheit (Retentat)</td><td>&ge;97</td><td>% CH4</td><td>DVGW G 260</td></tr>
+  <tr><td>Methanr&uuml;ckgewinnung</td><td>&ge;99</td><td>%</td><td>3-stufige Membran</td></tr>
+  <tr><td>Methanschlupf</td><td>&lt;1</td><td>%</td><td>Hersteller-Angabe</td></tr>
+  <tr><td>CO2-Gehalt im Permeat</td><td>85&ndash;95</td><td>%</td><td>Membran-Technik</td></tr>
+  <tr><td>Betriebsdruck (Eingang)</td><td>10&ndash;16</td><td>bar</td><td>Typisch Schraubenverdichter</td></tr>
+  <tr><td>Spez. Energiebedarf Verdichter</td><td>0,25</td><td>kWh/Nm&sup3;</td><td>Literatur / Anbieter</td></tr>
+  <tr><td>Betriebsstunden</td><td>8.138</td><td>h/a</td><td>Mittel Abschnitt 1</td></tr>
+</table>
+
+<h3>2.2 &ensp; Berechnungen Membrananlage</h3>
+
+<table class="calc-table">
+  <thead>
+    <tr><th>Gr&ouml;&szlig;e</th><th>Berechnung</th><th>Ergebnis</th><th>Einheit</th><th>Quelle</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Erforderliche Membrankapazit&auml;t</td>
+      <td>= V&#775;<sub>Rohbiogas</sub> &times; 1,1 (Reserve)</td>
+      <td>2.420</td>
+      <td>Nm&sup3;/h</td>
+      <td>+10% Auslegungsreserve</td>
+    </tr>
+    <tr>
+      <td>Jahreskapazit&auml;t Membran</td>
+      <td>= 2.420 &times; 8.138</td>
+      <td>19.694.000</td>
+      <td>Nm&sup3;/a</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Biomethan-Output (Retentat)</td>
+      <td>= V&#775;<sub>Roh</sub> &times; x<sub>CH4</sub> &times; &eta;<sub>R&uuml;ck</sub><br>= 2.200 &times; 0,539 &times; 0,99</td>
+      <td>1.174</td>
+      <td>Nm&sup3;/h</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Biomethan-Jahresproduktion</td>
+      <td>= 1.174 &times; 8.138</td>
+      <td>9.554.000</td>
+      <td>Nm&sup3;/a</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>CO2-reiches Permeat</td>
+      <td>= V&#775;<sub>Roh</sub> &minus; V&#775;<sub>Biomethan</sub><br>= 2.200 &minus; 1.174</td>
+      <td>1.026</td>
+      <td>Nm&sup3;/h</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Permeat-Jahresvolumen</td>
+      <td>= 1.026 &times; 8.138</td>
+      <td>8.350.000</td>
+      <td>Nm&sup3;/a</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>CO2 im Permeat (&empty; 90%)</td>
+      <td>= 1.026 &times; 0,90</td>
+      <td>923</td>
+      <td>Nm&sup3;/h</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Restmethan im Permeat</td>
+      <td>= V&#775;<sub>Roh</sub> &times; x<sub>CH4</sub> &times; (1 &minus; &eta;<sub>R</sub>)<br>= 2.200 &times; 0,539 &times; 0,01</td>
+      <td>~12</td>
+      <td>Nm&sup3;/h</td>
+      <td>1% Methanschlupf</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>2.3 &ensp; Energiebedarf Verdichter (Gasverdichtung vor Membran)</h3>
+
+<div class="formula">
+  P<sub>Verdichter</sub> = V&#775;<sub>Rohbiogas</sub> &times; w<sub>spez</sub> = 2.200 Nm&sup3;/h &times; 0,25 kWh/Nm&sup3; = <strong>550 kW<sub>el</sub></strong>
+</div>
+
+<table class="calc-table">
+  <thead>
+    <tr><th>Gr&ouml;&szlig;e</th><th>Berechnung</th><th>Ergebnis</th><th>Einheit</th><th></th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Verdichterleistung</td>
+      <td>= 2.200 &times; 0,25</td>
+      <td>550</td>
+      <td>kW<sub>el</sub></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Stromverbrauch Verdichter</td>
+      <td>= 550 &times; 8.138</td>
+      <td>4.476.000</td>
+      <td>kWh/a</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>K&uuml;hlanlage (Gastrocknung)</td>
+      <td>&asymp; 10% von P<sub>Verdichter</sub></td>
+      <td>55</td>
+      <td>kW<sub>el</sub></td>
+      <td>Erfahrungswert</td>
+    </tr>
+    <tr>
+      <td>Peripherie (MSR, Pumpen)</td>
+      <td>&asymp; 5% von P<sub>Verdichter</sub></td>
+      <td>28</td>
+      <td>kW<sub>el</sub></td>
+      <td>Erfahrungswert</td>
+    </tr>
+    <tr>
+      <td><strong>Gesamt Strombedarf Membran</strong></td>
+      <td>= 550 + 55 + 28</td>
+      <td><strong>633</strong></td>
+      <td>kW<sub>el</sub></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="result">
+  <strong>Membrananlage &mdash; Kernergebnisse:</strong><br>
+  Kapazit&auml;t: <strong>2.420 Nm&sup3;/h</strong> (2.200 + 10% Reserve) &ensp;|&ensp;
+  Biomethan: <strong>1.174 Nm&sup3;/h</strong> (&asymp; 9,55 Mio. Nm&sup3;/a) &ensp;|&ensp;
+  Permeat: <strong>1.026 Nm&sup3;/h</strong> &ensp;|&ensp;
+  Strombedarf: <strong>633 kW</strong>
+</div>
+
+
+<!-- ============================================================ -->
+<!--              3. REVERION rSOC                                  -->
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<h2><span class="sec-nr">3</span> Reverion rSOC &mdash; Dimensionierung</h2>
+
+<h3>3.1 &ensp; Eingangsparameter (Permeat aus Membran)</h3>
+
+<table>
+  <tr><th style="width:45%;">Parameter</th><th style="width:20%;">Wert</th><th style="width:15%;">Einheit</th><th style="width:20%;">Quelle / Anmerkung</th></tr>
+  <tr><td>Permeat-Volumenstrom</td><td><strong>1.026</strong></td><td>Nm&sup3;/h</td><td>Membran-Berechnung</td></tr>
+  <tr><td>CO2-Gehalt im Permeat</td><td>~90</td><td>%</td><td>Membran-typisch</td></tr>
+  <tr><td>CH4-Gehalt im Permeat (Restmethan)</td><td>~1&ndash;3</td><td>%</td><td>&asymp; 12 Nm&sup3;/h</td></tr>
+  <tr><td>CO2-Abscheidegrad Reverion</td><td><span class="ph">&ge;90</span></td><td>%</td><td>Von Reverion zu best&auml;tigen</td></tr>
+  <tr><td>CO2-Reinheit (Output)</td><td>&gt;99,9</td><td>%</td><td>Food-Grade (ISBT/EIGA)</td></tr>
+  <tr><td>Elektrischer Wirkungsgrad (SOFC)</td><td><span class="ph">55</span></td><td>%</td><td>Von Reverion zu best&auml;tigen</td></tr>
+  <tr><td>Thermischer Wirkungsgrad</td><td><span class="ph">25</span></td><td>%</td><td>Abw&auml;rmenutzung</td></tr>
+  <tr><td>CO2-Normdichte</td><td>1,977</td><td>kg/Nm&sup3;</td><td>Physikalische Konstante</td></tr>
+  <tr><td>CH4-Heizwert (H<sub>u</sub>)</td><td>9,97</td><td>kWh/Nm&sup3;</td><td>Physikalische Konstante</td></tr>
+</table>
+
+<h3>3.2 &ensp; CO2-Produktion (Food-Grade)</h3>
+
+<div class="formula">
+  V&#775;<sub>CO2,rein</sub> = V&#775;<sub>Permeat</sub> &times; x<sub>CO2</sub> &times; &eta;<sub>Abscheid</sub>
+  <br>
+  &emsp;&emsp;&emsp;&emsp;&emsp; = 1.026 &times; 0,90 &times; 0,90 = <strong>831 Nm&sup3;/h CO2</strong>
+  <br><br>
+  m&#775;<sub>CO2</sub> = V&#775;<sub>CO2,rein</sub> &times; &rho;<sub>CO2</sub> = 831 &times; 1,977 = <strong>1.643 kg/h</strong> = <strong>1,64 t/h</strong>
+</div>
+
+<table class="calc-table">
+  <thead>
+    <tr><th>Gr&ouml;&szlig;e</th><th>Berechnung</th><th>Ergebnis</th><th>Einheit</th><th></th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CO2 Food-Grade (stündlich)</td>
+      <td>= 1.026 &times; 0,90 &times; 0,90 &times; 1,977</td>
+      <td>1.643</td>
+      <td>kg/h</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>CO2 Food-Grade (t&auml;glich)</td>
+      <td>= 1.643 &times; 24 / 1.000</td>
+      <td>39,4</td>
+      <td>t/d</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>CO2 Food-Grade (j&auml;hrlich)</td>
+      <td>= 1,643 &times; 8.138</td>
+      <td>13.375</td>
+      <td>t/a</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>3.3 &ensp; Stromerzeugung (SOFC-Modus)</h3>
+
+<div class="formula">
+  P<sub>el,Reverion</sub> = V&#775;<sub>CH4,Permeat</sub> &times; H<sub>u,CH4</sub> &times; &eta;<sub>el</sub>
+  <br>
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; = 12 Nm&sup3;/h &times; 9,97 kWh/Nm&sup3; &times; 0,55 = <strong>66 kW<sub>el</sub></strong>
+</div>
+
+<table class="calc-table">
+  <thead>
+    <tr><th>Gr&ouml;&szlig;e</th><th>Berechnung</th><th>Ergebnis</th><th>Einheit</th><th></th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Elektrische Leistung</td>
+      <td>= 12 &times; 9,97 &times; 0,55</td>
+      <td>66</td>
+      <td>kW<sub>el</sub></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Jahresstromerzeugung</td>
+      <td>= 66 &times; 8.138</td>
+      <td>537.000</td>
+      <td>kWh/a</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>W&auml;rmeleistung</td>
+      <td>= 12 &times; 9,97 &times; 0,25</td>
+      <td>30</td>
+      <td>kW<sub>th</sub></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Jahresw&auml;rme</td>
+      <td>= 30 &times; 8.138</td>
+      <td>244.000</td>
+      <td>kWh/a</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="note note-info">
+  <strong>Hinweis:</strong> Die Stromerzeugung der Reverion-Einheit (66 kW) basiert ausschlie&szlig;lich auf dem
+  <strong>Restmethan im Permeat</strong> (~12 Nm&sup3;/h, Methanschlupf der Membran). Die Hauptfunktion der Reverion rSOC
+  ist die <strong>CO2-Abscheidung in Food-Grade-Qualit&auml;t</strong>, nicht die Stromerzeugung. Der Strom ist ein
+  wertvolles Nebenprodukt.
+</div>
+
+<div class="result">
+  <strong>Reverion rSOC &mdash; Kernergebnisse:</strong><br>
+  CO2 Food-Grade: <strong>1,64 t/h</strong> (&asymp; 13.375 t/a) &ensp;|&ensp;
+  Strom: <strong>66 kW<sub>el</sub></strong> (537 MWh/a) &ensp;|&ensp;
+  W&auml;rme: <strong>30 kW<sub>th</sub></strong> (244 MWh/a)
+</div>
+
+
+<!-- ============================================================ -->
+<!--              4. PIPELINE-DIMENSIONIERUNG                       -->
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<h2><span class="sec-nr">4</span> Pipeline &mdash; Dimensionierung (20 km Sammelleitung)</h2>
+
+<p>
+  Die Rohbiogas-Sammelleitung transportiert das unaufbereitete Biogas von den 8 Anlagen zum zentralen
+  Aufbereitungsstandort. Die Leitung muss f&uuml;r den <strong>gesamten Rohbiogas-Volumenstrom</strong>
+  (2.200 Nm&sup3;/h) ausgelegt werden.
+</p>
+
+<h3>4.1 &ensp; Auslegungsparameter</h3>
+
+<table>
+  <tr><th style="width:45%;">Parameter</th><th style="width:20%;">Wert</th><th style="width:15%;">Einheit</th><th style="width:20%;">Quelle</th></tr>
+  <tr><td>Volumenstrom (Betrieb)</td><td><strong>2.200</strong></td><td>Nm&sup3;/h</td><td>Abschnitt 1</td></tr>
+  <tr><td>Auslegungsvolumenstrom (+10%)</td><td><strong>2.420</strong></td><td>Nm&sup3;/h</td><td>Reserve</td></tr>
+  <tr><td>Leitungsl&auml;nge</td><td>~20</td><td>km</td><td>Projektdefinition</td></tr>
+  <tr><td>Eingangsdruck (nach Verdichter)</td><td><span class="ph">6</span></td><td>bar</td><td>Abh&auml;ngig von Konfiguration</td></tr>
+  <tr><td>Mindestdruck am Endpunkt</td><td><span class="ph">2</span></td><td>bar</td><td>Membrananlage-Eingang</td></tr>
+  <tr><td>Zul&auml;ssiger Druckverlust</td><td><span class="ph">4</span></td><td>bar</td><td>= P<sub>ein</sub> &minus; P<sub>aus</sub></td></tr>
+  <tr><td>Betriebstemperatur</td><td>~20</td><td>&deg;C</td><td>Erdverlegung</td></tr>
+  <tr><td>Gasdichte (Biogas, Normbed.)</td><td>~1,22</td><td>kg/Nm&sup3;</td><td>55% CH4 / 45% CO2</td></tr>
+  <tr><td>Material</td><td colspan="3">PE-HD (bis 10 bar) oder Stahl (h&ouml;here Dr&uuml;cke)</td></tr>
+</table>
+
+<h3>4.2 &ensp; Durchmesserberechnung (vereinfacht nach DVGW G 463 / Panhandle B)</h3>
+
+<p>
+  F&uuml;r die &uuml;berschl&auml;gige Auslegung wird eine vereinfachte Berechnung nach der
+  <strong>Panhandle-B-Gleichung</strong> herangezogen, die im Bereich von Biogasleitungen
+  (mittlerer Druck, mittlere L&auml;nge) ausreichend genaue Ergebnisse liefert.
+</p>
+
+<div class="formula">
+  Vereinfachte Absch&auml;tzung &uuml;ber Str&ouml;mungsgeschwindigkeit:
+  <br><br>
+  V&#775;<sub>Betrieb</sub> = V&#775;<sub>Norm</sub> &times; (P<sub>n</sub> / P<sub>m</sub>) &times; (T<sub>m</sub> / T<sub>n</sub>)
+  <br>
+  &emsp; P<sub>m</sub> = (P<sub>ein</sub> + P<sub>aus</sub>) / 2 = (6 + 2) / 2 = 4 bar (abs.)
+  <br>
+  &emsp; V&#775;<sub>Betrieb</sub> = 2.420 &times; (1,013 / 4) &times; (293 / 273) = <strong>659 m&sup3;/h</strong>
+  <br><br>
+  Leitungsdurchmesser bei max. Str&ouml;mungsgeschwindigkeit v<sub>max</sub> = 10 m/s (DVGW-Empfehlung):
+  <br>
+  A = V&#775;<sub>Betrieb</sub> / (3.600 &times; v<sub>max</sub>) = 659 / (3.600 &times; 10) = 0,0183 m&sup2;
+  <br>
+  d = &radic;(4 &times; A / &pi;) = &radic;(4 &times; 0,0183 / 3,1416) = <strong>0,153 m &asymp; DN 200</strong>
+</div>
+
+<table class="calc-table">
+  <thead>
+    <tr><th>Gr&ouml;&szlig;e</th><th>Berechnung</th><th>Ergebnis</th><th>Einheit</th><th></th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mittlerer Betriebsdruck</td>
+      <td>= (6 + 2) / 2</td>
+      <td>4,0</td>
+      <td>bar (abs.)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Betriebsvolumenstrom</td>
+      <td>= 2.420 &times; 1,013/4 &times; 293/273</td>
+      <td>659</td>
+      <td>m&sup3;/h</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Erforderlicher Querschnitt</td>
+      <td>= 659 / (3.600 &times; 10)</td>
+      <td>0,0183</td>
+      <td>m&sup2;</td>
+      <td>bei v=10 m/s</td>
+    </tr>
+    <tr>
+      <td>Innendurchmesser (berechnet)</td>
+      <td>= &radic;(4 &times; 0,0183 / &pi;)</td>
+      <td>153</td>
+      <td>mm</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><strong>Nennweite (gew&auml;hlt)</strong></td>
+      <td>N&auml;chste Normgr&ouml;&szlig;e</td>
+      <td><strong>DN 200</strong></td>
+      <td></td>
+      <td>PE-HD SDR 11</td>
+    </tr>
+    <tr>
+      <td>Tats. Str&ouml;mungsgeschwindigkeit</td>
+      <td>= 659 / (3.600 &times; &pi;/4 &times; 0,2&sup2;)</td>
+      <td>5,8</td>
+      <td>m/s</td>
+      <td>&lt; 10 m/s &check;</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>4.3 &ensp; Druckverlust-Absch&auml;tzung</h3>
+
+<div class="formula">
+  Druckverlust (vereinfacht, Darcy-Weisbach):
+  <br>
+  &Delta;p = &lambda; &times; (L/d) &times; (&rho; &times; v&sup2; / 2)
+  <br>
+  &emsp; &lambda; &asymp; 0,02 (Reibungsbeiwert PE-HD, Re ~10<sup>5</sup>)
+  <br>
+  &emsp; L = 20.000 m, d = 0,2 m, &rho;<sub>Betrieb</sub> &asymp; 4,8 kg/m&sup3;, v = 5,8 m/s
+  <br>
+  &Delta;p = 0,02 &times; (20.000/0,2) &times; (4,8 &times; 5,8&sup2; / 2) = 0,02 &times; 100.000 &times; 80,7
+  <br>
+  &Delta;p &asymp; <strong>161.400 Pa &asymp; 1,6 bar</strong>
+</div>
+
+<div class="result">
+  <strong>Pipeline &mdash; Kernergebnisse:</strong><br>
+  Nennweite: <strong>DN 200</strong> (PE-HD) &ensp;|&ensp;
+  Str&ouml;mungsgeschwindigkeit: <strong>5,8 m/s</strong> (ok, &lt;10 m/s) &ensp;|&ensp;
+  Druckverlust: <strong>~1,6 bar</strong> auf 20 km &ensp;|&ensp;
+  Verbleibender Druck am Zentralstandort: <strong>~4,4 bar</strong>
+</div>
+
+<div class="note note-warn">
+  <strong>Zu pr&uuml;fen:</strong> Bei Sternkonfiguration (statt Haupttrasse) k&ouml;nnen Teilabschnitte kleiner
+  dimensioniert werden (z.B. DN 100&ndash;150 f&uuml;r Zuleitungen einzelner Anlagen). Die endg&uuml;ltige
+  Trassenplanung muss durch ein Ingenieurb&uuml;ro erfolgen.
+</div>
+
+
+<!-- ============================================================ -->
+<!--              5. CO2-LOGISTIK                                   -->
+<!-- ============================================================ -->
+<h2><span class="sec-nr">5</span> CO2-Logistik &mdash; Mengenger&uuml;st</h2>
+
+<h3>5.1 &ensp; CO2-Produktionsmenge</h3>
+
+<table class="calc-table">
+  <thead>
+    <tr><th>Gr&ouml;&szlig;e</th><th>Berechnung</th><th>Ergebnis</th><th>Einheit</th><th></th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CO2-Produktion (st&uuml;ndlich)</td>
+      <td>Aus Abschnitt 3</td>
+      <td>1.643</td>
+      <td>kg/h</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>CO2-Produktion (t&auml;glich)</td>
+      <td>= 1.643 &times; 24 / 1.000</td>
+      <td>39,4</td>
+      <td>t/d</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>CO2-Produktion (w&ouml;chentlich)</td>
+      <td>= 39,4 &times; 7</td>
+      <td>276</td>
+      <td>t/Woche</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>CO2-Produktion (j&auml;hrlich)</td>
+      <td>Aus Abschnitt 3</td>
+      <td>13.375</td>
+      <td>t/a</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>5.2 &ensp; Zwischenspeicher</h3>
+
+<table class="calc-table">
+  <thead>
+    <tr><th>Gr&ouml;&szlig;e</th><th>Berechnung / Annahme</th><th>Ergebnis</th><th>Einheit</th><th></th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Speicherdauer (Ziel)</td>
+      <td>Puffer fuer Wochenende + 1 Tag</td>
+      <td>3</td>
+      <td>Tage</td>
+      <td>Sicherheitspuffer</td>
+    </tr>
+    <tr>
+      <td>Erforderl. Speicherkapazit&auml;t</td>
+      <td>= 39,4 &times; 3</td>
+      <td>118</td>
+      <td>t CO2</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>CO2-Dichte (fl&uuml;ssig, -25&deg;C)</td>
+      <td>Fl&uuml;ssig-CO2 bei 15&ndash;20 bar</td>
+      <td>~1.100</td>
+      <td>kg/m&sup3;</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Tankvolumen (netto)</td>
+      <td>= 118.000 / 1.100</td>
+      <td>107</td>
+      <td>m&sup3;</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Tankvolumen (brutto, 85% F&uuml;llung)</td>
+      <td>= 107 / 0,85</td>
+      <td>~126</td>
+      <td>m&sup3;</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><strong>Empfehlung</strong></td>
+      <td>3&ndash;4 Drucktanks &agrave; 30&ndash;50 m&sup3;</td>
+      <td><strong>3&times;50 m&sup3;</strong></td>
+      <td></td>
+      <td>Standard-Gr&ouml;&szlig;en</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>5.3 &ensp; LKW-Transporte</h3>
+
+<table class="calc-table">
+  <thead>
+    <tr><th>Gr&ouml;&szlig;e</th><th>Berechnung / Annahme</th><th>Ergebnis</th><th>Einheit</th><th></th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>LKW-Kapazit&auml;t</td>
+      <td>Standard CO2-Tankzug</td>
+      <td>20</td>
+      <td>t/Fahrt</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Fahrten pro Tag</td>
+      <td>= 39,4 / 20</td>
+      <td>2,0</td>
+      <td>Fahrten/d</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Fahrten pro Woche</td>
+      <td>= 276 / 20</td>
+      <td>~14</td>
+      <td>Fahrten/Wo.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>&empty; Transportentfernung</td>
+      <td><span class="ph">50&ndash;100</span></td>
+      <td><span class="ph">75</span></td>
+      <td>km</td>
+      <td>Brauereien Bayern</td>
+    </tr>
+    <tr>
+      <td>Erforderliche LKW</td>
+      <td>2 Fahrten/d &times; 2&times;75 km &div; 600 km/d</td>
+      <td>1&ndash;2</td>
+      <td>LKW</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="result">
+  <strong>CO2-Logistik &mdash; Kernergebnisse:</strong><br>
+  Tagesproduktion: <strong>39,4 t/d</strong> &ensp;|&ensp;
+  Zwischenspeicher: <strong>3 &times; 50 m&sup3;</strong> Drucktanks &ensp;|&ensp;
+  LKW-Fahrten: <strong>~14/Woche</strong> (2/Tag) &ensp;|&ensp;
+  Fahrzeuge: <strong>1&ndash;2 LKW</strong>
+</div>
+
+
+<!-- ============================================================ -->
+<!--              6. ENERGIEBILANZ                                  -->
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<h2><span class="sec-nr">6</span> Energiebilanz &mdash; Gesamtsystem</h2>
+
+<h3>6.1 &ensp; Stromverbraucher</h3>
+
+<table>
+  <thead>
+    <tr><th style="width:40%;">Verbraucher</th><th style="width:15%;">Leistung</th><th style="width:10%;">Einheit</th><th style="width:15%;">kWh/a</th><th style="width:20%;">Anmerkung</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Verdichter (Membrananlage)</td><td>550</td><td>kW</td><td>4.476.000</td><td>Hauptverbraucher</td></tr>
+    <tr><td>K&uuml;hlanlage / Gastrocknung</td><td>55</td><td>kW</td><td>448.000</td><td>~10% Verdichter</td></tr>
+    <tr><td>Peripherie (MSR, Pumpen, Beleuchtung)</td><td>28</td><td>kW</td><td>228.000</td><td>~5% Verdichter</td></tr>
+    <tr><td>CO2-Verfl&uuml;ssigung / K&auml;lteanlage</td><td>120</td><td>kW</td><td>977.000</td><td>~0,09 kWh/kg CO2</td></tr>
+    <tr><td>Reverion rSOC (Eigenstrom)</td><td>15</td><td>kW</td><td>122.000</td><td>BOS, Steuerung</td></tr>
+    <tr style="background:var(--primary); color:#fff; font-weight:700;">
+      <td style="color:#fff;"><strong>SUMME Stromverbrauch</strong></td>
+      <td style="color:#fff;"><strong>768</strong></td>
+      <td style="color:#fff;">kW</td>
+      <td style="color:#fff;"><strong>6.251.000</strong></td>
+      <td style="color:#fff;"></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>6.2 &ensp; Stromerzeuger</h3>
+
+<table>
+  <thead>
+    <tr><th style="width:40%;">Erzeuger</th><th style="width:15%;">Leistung</th><th style="width:10%;">Einheit</th><th style="width:15%;">kWh/a</th><th style="width:20%;">Anmerkung</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Reverion rSOC (SOFC-Modus)</td><td>66</td><td>kW</td><td>537.000</td><td>Restmethan-Verwertung</td></tr>
+    <tr style="background:var(--success); color:#fff; font-weight:700;">
+      <td style="color:#fff;"><strong>SUMME Stromerzeugung</strong></td>
+      <td style="color:#fff;"><strong>66</strong></td>
+      <td style="color:#fff;">kW</td>
+      <td style="color:#fff;"><strong>537.000</strong></td>
+      <td style="color:#fff;"></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>6.3 &ensp; Netto-Energiebilanz</h3>
+
+<div class="formula">
+  Netto-Strombezug = Verbrauch &minus; Erzeugung = 768 &minus; 66 = <strong>702 kW</strong>
+  <br>
+  Netto-Strombezug (j&auml;hrlich) = 6.251.000 &minus; 537.000 = <strong>5.714.000 kWh/a</strong> = <strong>5.714 MWh/a</strong>
+  <br><br>
+  Spezifischer Strombedarf = 5.714.000 / 9.554.000 Nm&sup3; Biomethan = <strong>0,60 kWh/Nm&sup3; Biomethan</strong>
+  <br>
+  (inkl. CO2-Verfl&uuml;ssigung; ohne CO2-Verfl. = ~0,50 kWh/Nm&sup3;)
+</div>
+
+<div class="result">
+  <strong>Energiebilanz &mdash; Kernergebnisse:</strong><br>
+  Strombedarf (brutto): <strong>768 kW</strong> (6.251 MWh/a) &ensp;|&ensp;
+  Stromerzeugung Reverion: <strong>66 kW</strong> (537 MWh/a) &ensp;|&ensp;
+  Netto-Strombezug: <strong>702 kW</strong> (5.714 MWh/a) &ensp;|&ensp;
+  Spez. Verbrauch: <strong>0,60 kWh/Nm&sup3;</strong>
+</div>
+
+<div class="note note-info">
+  <strong>Vergleich:</strong> Der spezifische Energiebedarf von 0,50&ndash;0,60 kWh/Nm&sup3; Biomethan liegt im
+  &uuml;blichen Bereich f&uuml;r Membranaufbereitungsanlagen (0,20&ndash;0,30 kWh/Nm&sup3; reine Aufbereitung).
+  Der h&ouml;here Wert erkl&auml;rt sich durch die zus&auml;tzliche CO2-Verfl&uuml;ssigung, die bei konventionellen
+  Anlagen (RTO) nicht anf&auml;llt &mdash; daf&uuml;r entsteht ein zus&auml;tzlicher Erl&ouml;sstrom (CO2-Verkauf).
+</div>
+
+
+<!-- ============================================================ -->
+<!--              7. ZUSAMMENFASSUNG                                -->
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<h2><span class="sec-nr">7</span> Zusammenfassung der Dimensionierung</h2>
+
+<table class="summary-table">
+  <tbody>
+    <tr class="group-header"><td colspan="4">Eingangsseite &mdash; 8 Biogasanlagen</td></tr>
+    <tr><td>Gesamtvolumenstrom Rohbiogas</td><td>2.200</td><td>Nm&sup3;/h</td><td>Summe 8 Anlagen</td></tr>
+    <tr><td>Mittlerer CH4-Gehalt</td><td>53,9</td><td>%</td><td></td></tr>
+    <tr><td>Rohbiogas-Jahresvolumen</td><td>17.918.000</td><td>Nm&sup3;/a</td><td></td></tr>
+
+    <tr class="group-header"><td colspan="4">Membrananlage (zentraler Standort)</td></tr>
+    <tr><td>Auslegungskapazit&auml;t (+10%)</td><td>2.420</td><td>Nm&sup3;/h</td><td>3-stufig</td></tr>
+    <tr><td>Biomethan-Output</td><td>1.174</td><td>Nm&sup3;/h</td><td>&ge;97% CH4</td></tr>
+    <tr><td>Biomethan-Jahresproduktion</td><td>9.554.000</td><td>Nm&sup3;/a</td><td>&asymp; 95,5 GWh/a (H<sub>s</sub>)</td></tr>
+    <tr><td>Permeat (an Reverion)</td><td>1.026</td><td>Nm&sup3;/h</td><td>~90% CO2</td></tr>
+    <tr><td>Strombedarf Membrananlage</td><td>633</td><td>kW<sub>el</sub></td><td></td></tr>
+
+    <tr class="group-header"><td colspan="4">Reverion rSOC (zentraler Standort, 1 Einheit)</td></tr>
+    <tr><td>CO2-Produktion (Food-Grade)</td><td>1,64</td><td>t/h</td><td>&gt;99,9% Reinheit</td></tr>
+    <tr><td>CO2-Jahresproduktion</td><td>13.375</td><td>t/a</td><td></td></tr>
+    <tr><td>Stromerzeugung (SOFC)</td><td>66</td><td>kW<sub>el</sub></td><td>Restmethan</td></tr>
+    <tr><td>W&auml;rmeerzeugung</td><td>30</td><td>kW<sub>th</sub></td><td>Nutzbar</td></tr>
+
+    <tr class="group-header"><td colspan="4">Pipeline (Rohbiogas-Sammelleitung)</td></tr>
+    <tr><td>Leitungsl&auml;nge</td><td>~20</td><td>km</td><td></td></tr>
+    <tr><td>Nennweite</td><td>DN 200</td><td></td><td>PE-HD</td></tr>
+    <tr><td>Druckverlust</td><td>~1,6</td><td>bar</td><td>Bei 5,8 m/s</td></tr>
+
+    <tr class="group-header"><td colspan="4">CO2-Logistik</td></tr>
+    <tr><td>Tagesproduktion CO2</td><td>39,4</td><td>t/d</td><td></td></tr>
+    <tr><td>Zwischenspeicher</td><td>3 &times; 50</td><td>m&sup3;</td><td>Drucktanks</td></tr>
+    <tr><td>LKW-Fahrten</td><td>~14</td><td>/Woche</td><td>20 t/Fahrt</td></tr>
+    <tr><td>Fahrzeuge</td><td>1&ndash;2</td><td>LKW</td><td></td></tr>
+
+    <tr class="group-header"><td colspan="4">Energiebilanz (Gesamtsystem)</td></tr>
+    <tr><td>Strombedarf (brutto)</td><td>768</td><td>kW<sub>el</sub></td><td>6.251 MWh/a</td></tr>
+    <tr><td>Stromerzeugung Reverion</td><td>66</td><td>kW<sub>el</sub></td><td>537 MWh/a</td></tr>
+    <tr><td>Netto-Strombezug</td><td>702</td><td>kW<sub>el</sub></td><td>5.714 MWh/a</td></tr>
+    <tr><td>Spez. Energiebedarf</td><td>0,60</td><td>kWh/Nm&sup3;</td><td>Biomethan</td></tr>
+  </tbody>
+</table>
+
+<div class="note note-warn" style="margin-top: 5mm;">
+  <strong>N&auml;chste Schritte:</strong>
+  <ul style="margin-top:1mm;">
+    <li>Reale Anlagendaten der 8 Betreiber eintragen (Datenblatt Biogasanlage)</li>
+    <li>Best&auml;tigung Reverion: Abscheidegrad, elektrischer/thermischer Wirkungsgrad, TRL</li>
+    <li>Angebote Membrananbieter einholen (2 Vergleichsangebote)</li>
+    <li>Ingenieurb&uuml;ro: Detailplanung Trassenf&uuml;hrung 20 km</li>
+    <li>CO2-Abnehmer: LoI Brauereien / Getr&auml;nkeindustrie einholen</li>
+  </ul>
+</div>
+
+
+<!-- ==================== FOOTER ==================== -->
+<div class="footer">
+  Energieberatung Schwaigkofler GmbH &bull; Poststrasse 2 &bull; FL-9491 Ruggell &bull;
+  info@schwaigkofler.org &bull; +49 821 567 316 77<br>
+  <em>Technische Vorauslegung &mdash; Vorl&auml;ufig, Stand 2. M&auml;rz 2026</em>
+</div>
+
+</body>
+</html>
